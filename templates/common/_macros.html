@@ -1,0 +1,6 @@
+{#定义所有的宏#}
+
+{% macro static(filename) %}
+        {{ url_for('static',filename=filename) }}
+
+{% endmacro %}

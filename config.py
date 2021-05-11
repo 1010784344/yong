@@ -41,3 +41,25 @@ PER_PAGE = 10
 # celery 的相关配置
 CELERY_RESULT_BACKEND = 'redis://@127.0.0.1:6379/0'
 CELERY_BROKER_URL = 'redis://@127.0.0.1:6379/0'
+
+
+#路径配置相关信息
+APPS_DIR = os.path.dirname(__file__)
+UPLOADED_dir = os.path.join(APPS_DIR,'tasks')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint,render_template,views,request,redirect,url_for,session,g,jsonify
-from apps.cms.forms import LoginForm,ResetpwdForm,ResetemailForm,AddBannerForm,UpdateBannerForm,AddBoardForm,UpdateBoardForm
+from apps.cms.forms import LoginForm,ResetpwdForm,ResetemailForm,AddBannerForm,UpdateBannerForm,AddBoardForm,UpdateBoardForm,AddTaskForm
 from apps.cms.models import CMSUser,CMPermission
-from apps.models import BannersModel,BoardModel,PostModel,HighlightPostModel
+from apps.models import BannersModel,BoardModel,PostModel,HighlightPostModel,TaskModel
 import config
 from apps.cms.decorators import LoginRequired,permission_required
 from exts import db,mail
@@ -10,6 +10,7 @@ from utils import zlmemcache
 from flask_mail import Message
 import string
 import random
+import os
 from tasks import send_email
 
 # 定义 cms 的蓝图
@@ -96,6 +97,55 @@ def banners():
     allbanner = BannersModel.query.order_by(BannersModel.priority.desc()).all()
 
     return render_template('cms/cms_banners.html',allbanner=allbanner)
+
+
+
+# 任务管理
+@cms_bp.route('/tasks/')
+@LoginRequired
+def tasks():
+
+    alltask = TaskModel.query.all()
+
+    return render_template('cms/cms_tasks.html',allbanner=alltask)
+
+#添加任务弹窗 的提交表单
+@cms_bp.route('/atask/',methods = ['POST'])
+@LoginRequired
+def atask():
+
+    form = AddTaskForm(request.form)
+
+    if form.validate():
+        name = form.name.data
+        img_url = request.files['img_url']
+        flag_url = form.link_url.data
+        text = form.priority.data
+
+        filename = img_url.filename
+
+        taskpath = os.path.join(config.UPLOADED_dir,name)
+        if not os.path.exists(taskpath):
+            os.makedirs(taskpath)
+        img_url.save(os.path.join(taskpath, filename))
+        # shutil.copy(img_url,taskpath)
+
+        task = TaskModel(name=name, image=filename,flag=flag_url,text=text,type='web')
+
+
+
+        db.session.add(task)
+        db.session.commit()
+
+        return jsonify({'code': '200', 'message': '任务添加成功！'})
+    else:
+
+        message = form.errors.popitem()[1][0]
+        # 表单验证错误（数据格式不对）
+
+        return jsonify({'code': '400', 'message': message})
+
+
 
 
 

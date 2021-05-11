@@ -1,6 +1,7 @@
 'use strict';
 
 var zlqiniu = {
+    //zlqiniu 对象 的setup 属性是一个方法
     'setup': function (args) {
         var domain = args['domain'];
         var params = {

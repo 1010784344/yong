@@ -1,6 +1,7 @@
 # -*- coding: UTF-8 -*-
 from exts import db
 from datetime import datetime
+import shortuuid
 
 # 添加 轮播图弹窗 的数据模型
 
@@ -27,6 +28,22 @@ class BoardModel(db.Model):
 
     posts = db.relationship('PostModel', backref='boards')
 
+# 添加 任务管理 的数据模型
+class TaskModel(db.Model):
+
+    __tablename__ = 'task'
+    id = db.Column(db.String(100), primary_key=True, default=shortuuid.uuid)
+    name = db.Column(db.String(255),nullable=False)
+    score = db.Column(db.Integer,default=100)
+    realscore = db.Column(db.Integer, default=0)
+    type = db.Column(db.String(255),nullable=True)
+    status = db.Column(db.String(255),nullable=True)
+    text = db.Column(db.String(255),nullable=False)
+    image = db.Column(db.String(255),nullable=False)
+    flag = db.Column(db.String(255),nullable=False)
+    creat_time = db.Column(db.DateTime,default=datetime.now)
+
+    front_users = db.relationship('FrontUser', backref='tasks')
 
 # 添加 帖子 的数据模型
 class PostModel(db.Model):

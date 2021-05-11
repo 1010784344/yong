@@ -30,7 +30,8 @@ class FrontUser(db.Model):
     # 用户 与 帖子建立 一对多的关系
     posts = db.relationship('PostModel', backref='author')
     comments = db.relationship('CommentModel', backref='author')
-
+    # 用户 与 任务建立 多对一的关系
+    task_id = db.Column(db.String(100), db.ForeignKey('task.id'))
     def __init__(self,*args,**kwargs):
         if 'password' in kwargs:
             self.password = kwargs.get('password')

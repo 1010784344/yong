@@ -48,6 +48,9 @@ APPS_DIR = os.path.dirname(__file__)
 UPLOADED_dir = os.path.join(APPS_DIR,'tasks')
 
 
+progress_mydata = {}
+
+
 
 
 

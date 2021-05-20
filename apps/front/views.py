@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 # from apps.front import bp
+import os
 from flask import Blueprint,views,render_template,request,jsonify,session,url_for,g,abort
 from apps.front.forms import SignupForm,SigninForm,AddPostForm,AddCommentForm
-from apps.models import BannersModel,BoardModel,PostModel,CommentModel,HighlightPostModel
+from apps.models import BannersModel,BoardModel,PostModel,CommentModel,HighlightPostModel,TaskModel,WorkModel
 from apps.front.models import FrontUser
 from apps.front.decorators import LoginRequired
 from exts import alidayu,db
@@ -46,19 +47,19 @@ def index():
 
     # 最新帖排序
     if st == 1:
-        query_obj = PostModel.query.order_by(PostModel.create_time.desc())
+        query_obj = TaskModel.query.order_by(TaskModel.creat_time.desc())
     # 精华帖排序(左连接)
-    if st == 2:
-        query_obj = db.session.query(PostModel).outerjoin(HighlightPostModel).order_by(HighlightPostModel.create_time.desc(),PostModel.create_time.desc())
-    # 点赞最多排序（功能还没有实现，暂时跟最新帖是一样的）
-    if st == 3:
-        query_obj = PostModel.query.order_by(PostModel.create_time.desc())
-    # 评论最多排序
-    if st == 4:
-        # 按一个帖子下面评论的多少来给这些帖子进行排序
-        # 先把评论按帖子来进行分组，然后再根据评论的个数进行排序（需要多多进行学习）
-        query_obj = db.session.query(PostModel).outerjoin(CommentModel).group_by(PostModel.id).\
-            order_by(func.count(CommentModel.id).desc(), PostModel.create_time.desc())
+    # if st == 2:
+    #     query_obj = db.session.query(PostModel).outerjoin(HighlightPostModel).order_by(HighlightPostModel.create_time.desc(),PostModel.create_time.desc())
+    # # 点赞最多排序（功能还没有实现，暂时跟最新帖是一样的）
+    # if st == 3:
+    #     query_obj = PostModel.query.order_by(PostModel.create_time.desc())
+    # # 评论最多排序
+    # if st == 4:
+    #     # 按一个帖子下面评论的多少来给这些帖子进行排序
+    #     # 先把评论按帖子来进行分组，然后再根据评论的个数进行排序（需要多多进行学习）
+    #     query_obj = db.session.query(PostModel).outerjoin(CommentModel).group_by(PostModel.id).\
+    #         order_by(func.count(CommentModel.id).desc(), PostModel.create_time.desc())
 
     # 获取指定页的数据
     if bd:
@@ -138,6 +139,51 @@ def apost():
             return jsonify({'code': '400', 'message': message})
 
 
+
+# 创建赛题
+# @front_bp.route('/acontest/',methods=['GET','POST'])
+# @LoginRequired
+# def acontest():
+#
+#     if request.method == 'GET':
+#         boards = BoardModel.query.all()
+#         return render_template('front/front_apost.html',boards=boards)
+#     else:
+#         form = AddPostForm(request.form)
+#         if form.validate():
+#             title = form.title.data
+#             content = form.content.data
+#             board_id = form.board_id.data
+#
+#
+#             board = BoardModel.query.get(board_id)
+#
+#
+#             if not board:
+#                 return jsonify({'code': '400', 'message': '没有这个板块！'})
+#             else:
+#                 post = PostModel(title=title,content=content)
+#                 post.boards = board
+#                 # 帖子新增用户名
+#                 post.author = g.front_user
+#
+#                 db.session.add(post)
+#                 db.session.commit()
+#
+#                 return jsonify({'code': '200', 'message': '帖子发布成功！'})
+#
+#         else:
+#             message = form.errors.popitem()[1][0]
+#             # 表单验证错误（数据格式不对）
+#
+#             return jsonify({'code': '400', 'message': message})
+
+
+
+
+
+
+
 # 帖子详情
 @front_bp.route('/p/<post_id>/')
 def post_detail(post_id):
@@ -149,6 +195,17 @@ def post_detail(post_id):
     else:
         return render_template('front/front_pdetail.html',post=post)
 
+
+# 任务详情
+@front_bp.route('/t/<post_id>/')
+def task_detail(post_id):
+    post = TaskModel.query.get(post_id)
+
+    if not post:
+        #如果帖子不存在，手动抛出一个异常
+        abort(404)
+    else:
+        return render_template('front/front_tdetail.html',post=post)
 
 
 
@@ -182,7 +239,55 @@ def acomment():
 
         return jsonify({'code': '400', 'message': message})
 
+# 创建赛题
+@front_bp.route('/acontest/',methods=['GET'])
+@LoginRequired
+def acontest():
 
+    task_id = request.args.get("task_id")
+
+    task = TaskModel.query.get(task_id)
+
+    if not task:
+        return jsonify({'code': '400', 'message': '没有这个赛题！'})
+    else:
+        work = WorkModel(task_flag='11111')
+        work.tasks = task
+        work.author = g.front_user
+        #  scp kube-flannel.yml wang1@192.168.141.178:/home/wang1
+        os.system('D:\myimage\pscp.exe -pw 123456 D:\myimage\my.tar wang@192.168.141.177:/home/wang')
+
+        print(1111)
+
+
+
+
+
+        db.session.add(work)
+        db.session.commit()
+
+
+        return jsonify({'code': '200', 'message': '成功！'})
+
+
+
+@front_bp.route('/progress_data/<uuid>')
+def progress_data(uuid):
+    '''
+    通过uuid将数据存入变量progress_data
+    '''
+    for i in range(12345666):
+        num_progress = round(i * 100 / 12345665, 2)
+
+        config.progress_mydata[uuid] = num_progress
+    return jsonify({'res': num_progress})
+
+@front_bp.route('/show_progress/<uuid>')
+def show_progress(uuid):
+    '''
+    前端请求进度的函数
+    '''
+    return jsonify({'res': config.progress_mydata[uuid]})
 
 
 

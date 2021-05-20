@@ -128,7 +128,7 @@ def atask():
         if not os.path.exists(taskpath):
             os.makedirs(taskpath)
         img_url.save(os.path.join(taskpath, filename))
-        # shutil.copy(img_url,taskpath)
+
 
         task = TaskModel(name=name, image=filename,flag=flag_url,text=text,type='web')
 

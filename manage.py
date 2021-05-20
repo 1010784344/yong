@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from zlbbs import app
+from myContest import app
 from exts import db
 from flask_script import Manager
 from flask_migrate import Migrate,MigrateCommand

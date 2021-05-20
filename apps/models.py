@@ -43,7 +43,7 @@ class TaskModel(db.Model):
     flag = db.Column(db.String(255),nullable=False)
     creat_time = db.Column(db.DateTime,default=datetime.now)
 
-    front_users = db.relationship('FrontUser', backref='tasks')
+    works = db.relationship('WorkModel', backref='tasks')
 
 # 添加 帖子 的数据模型
 class PostModel(db.Model):
@@ -73,6 +73,25 @@ class CommentModel(db.Model):
     #一个评论只能属于一个帖子，一个评论只能有一个作者
     post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
     author_id = db.Column(db.String(100),db.ForeignKey('front_user.id'),nullable=False)
+
+
+
+# 添加 work 的数据模型
+class WorkModel(db.Model):
+
+    __tablename__ = 'work'
+
+    id = db.Column(db.Integer, primary_key= True,autoincrement=True)
+    task_status = db.Column(db.String(255), nullable=True)
+    task_time = db.Column(db.DateTime, default=datetime.now)
+    task_score = db.Column(db.Integer, default=0)
+    task_flag = db.Column(db.String(255), nullable=False)
+
+    # 一个work只能属于一个赛题，一个work只能有一个人
+    task_id = db.Column(db.String(100), db.ForeignKey('task.id'))
+    author_id = db.Column(db.String(100),db.ForeignKey('front_user.id'),nullable=False)
+
+
 
 
 

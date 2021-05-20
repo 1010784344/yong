@@ -52,6 +52,25 @@ $(function () {
         formData.append('img_url', fileObj);
         console.log(formData.get('img_url'))
 
+        var  file = document.getElementById( "img_url" )
+        var xhr = new XMLHttpRequest;
+    xhr.open('post', 'file.php');
+    // 监听上传进度
+    xhr.upload.onprogress = function (ev) {
+    // 事件对象
+    // console.log(ev);
+
+        var percent = (ev.loaded / ev.total) * 100 + '%';
+
+        console.log(percent);
+
+        progress.style.width = percent;
+    }
+
+
+
+
+
         zlajax.post({
             'url': url,
             // 'data': {

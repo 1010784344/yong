@@ -1,0 +1,92 @@
+{% extends "front/front_base.html" %}
+{% from "common/_macros.html" import static %}
+
+{% block  title %}
+任务详情
+{% endblock %}
+
+
+{% block head %}
+    <script src="{{ url_for('static',filename='ueditor/ueditor.config.js') }}"></script>
+    <script src="{{ url_for('static',filename='ueditor/ueditor.all.min.js') }}"></script>
+    <script src="{{ static('front/js/front_tdetail.js') }}"></script>
+    <link href="{{ static('front/css/front_pdetail.css') }}"rel="stylesheet">
+
+
+{% endblock %}
+
+
+{% block body %}
+
+    <div class="lg-container">
+
+
+{#    帖子详情#}
+        <div class="post-container">
+            <h2>{{ post.name }}</h2>
+            <p class="post-info-group" id="post-content" data-id="{{ post.id }}">
+                <span>题目内容:{{ post.text }}</span>
+                <span>分值:{{ post.score }}</span>
+                <span>类型:{{ post.type }}</span>
+                <span>状态:{{ post.status }}</span>
+{#                <span>评论数:0</span>#}
+            </p>
+
+{#            <article class="post-content" id="post-content" data-id="{{ post.id }}">#}
+{#                {{ post.content|safe }}#}
+{#            </article>#}
+            <div id='contest-btn'>
+
+                <div class="issued_btn" ><span id='comment-btn'>创建赛题</span></div>
+{#倒计时代码块#}
+{#                <div class="extend">#}
+{#                    <div class="linkwz">#}
+{#                        <a href="http://eci-2ze56d54cxd7xie6m6kw.cloudeci1.ichunqiu.com:80" title="http://eci-2ze56d54cxd7xie6m6kw.cloudeci1.ichunqiu.com:80" target="_blank">http://eci-2ze56d54cxd7xie6m6kw.cloudeci1.ichunqiu.com:80</a>#}
+{#                    </div>#}
+{#                    <div class="setintover"><span id="cd_h">00 : </span><span id="cd_f">58 : </span><span id="cd_m">57</span>#}
+{##}
+{#                    </div>#}
+{##}
+{#                        <div class="operation_div">#}
+{#                            <div class="issued" onclick="">延长时间(<span>3</span>)</div>#}
+{#                            <div> </div>#}
+{#                            <div class="issued" onclick="">重新创建</div>#}
+{##}
+{#                        </div>#}
+{##}
+{##}
+{#                    </div>#}
+                </div>
+
+
+            <div class="form-group" style="width: 100%; overflow: hidden;">
+                            <label class="col-sm-2">Flag:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="img_url" >
+                            </div>
+                            <button class="col-sm-2 btn btn-info" id="upload-btn">提交</button>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

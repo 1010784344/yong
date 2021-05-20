@@ -2,7 +2,7 @@
 {% from "common/_macros.html" import static %}
 
 {% block  title %}
-王者荣耀论坛
+竞赛论坛
 {% endblock %}
 
 
@@ -95,13 +95,13 @@
                     <li>
                         <div class="author-avatar-group">
 {#                            如果用户没有上传头像就用默认的头像#}
-                            <img src="{{ post.author.avatar or url_for('static',filename='common/images/logo.png') }}"
+                            <img src="{{url_for('static',filename='common/images/logo.png') }}"
                                  alt="">
                         </div>
 
                         <div class="post-info-group">
 
-                            <p class="post-title"><a href="{{ url_for('front.post_detail',post_id=post.id) }}">{{ post.title }}</a>
+                            <p class="post-title"><a href="{{ url_for('front.task_detail',post_id=post.id) }}">{{ post.name }}</a>
 
     {#                        精华帖#}
                                 {% if post.highlight %}
@@ -109,12 +109,12 @@
                                 {% endif %}
                             </p>
 
-                            <p class="post-info">
-                                <span>作者:{{ post.author.username }}</span>
-                                <span>发表时间:{{ post.create_time }}</span>
-                                <span>评论:0</span>
-                                <span>阅读数 :0</span>
-                            </p>
+{#                            <p class="post-info">#}
+{#                                <span>作者:{{ post.author.username }}</span>#}
+{#                                <span>发表时间:{{ post.create_time }}</span>#}
+{#                                <span>评论:0</span>#}
+{#                                <span>阅读数 :0</span>#}
+{#                            </p>#}
                         </div>
                     </li>
                 {% endfor %}

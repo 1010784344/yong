@@ -11,3 +11,6 @@ mail = Mail()
 # 用来获取短信验证 码
 alidayu = AlidayuAPI()
 
+# 用来进行docker 相关的操作
+import docker
+mydocker = docker.DockerClient(base_url='unix://var/run/docker.sock')

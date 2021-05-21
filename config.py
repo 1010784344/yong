@@ -2,7 +2,7 @@
 
 import os
 DEBUG = True
-SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:123456@localhost/zlbbs?charset=utf8'
+SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:123456@127.0.0.1/zlbbs?charset=utf8'
 # SQLALCHEMY 里面的模型一有变动，那么他都会给我们发送一个信号，没有必要会浪费性能
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 
@@ -12,7 +12,7 @@ SECRET_KEY = 'man man lai'
 # 将 cms 后台用来保存 user.id 的 key ，提取为一个全局变量
 CMS_USER_ID = 'cms_user_id'
 FRONT_USER_ID = 'front_user_id'
-
+SERVER_NAME = "0.0.0.0:5000"
 
 # 邮箱配置信息
 MAIL_SERVER = "SMTP.qq.com"

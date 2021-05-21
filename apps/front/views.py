@@ -6,14 +6,14 @@ from apps.front.forms import SignupForm,SigninForm,AddPostForm,AddCommentForm
 from apps.models import BannersModel,BoardModel,PostModel,CommentModel,HighlightPostModel,TaskModel,WorkModel
 from apps.front.models import FrontUser
 from apps.front.decorators import LoginRequired
-from exts import alidayu,db
+from exts import alidayu,db,mydocker
 from utils import safeutils
 import config
 from flask_paginate import Pagination,get_page_parameter
 
 from sqlalchemy import func
 
-front_bp = Blueprint('front',__name__)
+front_bp = Blueprint('front', __name__)
 
 # 测试：注册完成跳转回上一个页面
 @front_bp.route('/test/')
@@ -254,11 +254,21 @@ def acontest():
         work = WorkModel(task_flag='11111')
         work.tasks = task
         work.author = g.front_user
-        #  scp kube-flannel.yml wang1@192.168.141.178:/home/wang1
-        os.system('D:\myimage\pscp.exe -pw 123456 D:\myimage\my.tar wang@192.168.141.177:/home/wang')
+        # tar包 转移到对应的机器
+        taskpath = os.path.join(config.UPLOADED_dir, task.name+os.sep+task.image)
+        import shutil
+        tmppath = '/home/srv'
+        shutil.copy(taskpath,tmppath)
 
-        print(1111)
+        realpath = tmppath+os.sep+task.image
+        # 加载镜像
+        with open(realpath, 'rb') as fp:
+            img = mydocker.images.load(fp.read())
 
+        imagename = img[0].tags
+
+        # 创建容器
+        mydocker.containers.create_container(imagename, name='yong1', stdin_open=True, tty=True)
 
 
 

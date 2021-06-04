@@ -48,12 +48,19 @@ class AddBannerForm(Form):
     link_url = StringField(validators=[input_required(message='请输入轮播图跳转链接！')])
     priority = StringField(validators=[input_required(message='请输入轮播图优先级！')])
 
-# 添加 任务弹窗 的表单验证
+# 添加 镜像弹窗 的表单验证
 class AddTaskForm(Form):
     name = StringField(validators=[input_required(message='请输入任务名称!')])
     img_url = StringField(validators=[])
     link_url = StringField(validators=[input_required(message='请输入轮播图跳转链接！')])
     priority = StringField(validators=[input_required(message='请输入轮播图优先级！')])
+    stypeRadio = StringField(validators=[])
+
+# 添加 主机弹窗 的表单验证
+class AddHostForm(Form):
+    name = StringField(validators=[input_required(message='请输入主机名称!')])
+    ip = StringField(validators=[])
+    status = StringField(validators=[input_required(message='请输入主机状态!')])
 
 
 # 编辑 轮播图弹窗 的表单验证

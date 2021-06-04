@@ -3,11 +3,11 @@
 
 
 {% block title %}
-    镜像管理
+    主机管理
 {% endblock %}
 
 {% block page_title %}
-    镜像管理
+    主机管理
 {% endblock %}
 
 
@@ -16,7 +16,7 @@
     <script src="https://cdn.staticfile.org/Plupload/2.1.1/plupload.dev.js"></script>
     <script src="https://cdn.staticfile.org/qiniu-js-sdk/1.0.14-beta/qiniu.js"></script>
     <script src="{{ static('common/zlqiniu.js') }}"></script>
-    <script src="{{ static('cms/js/task.js') }}"></script>
+    <script src="{{ static('cms/js/hosts.js') }}"></script>
 
     <style>
 
@@ -35,17 +35,16 @@
 
     <div class="top-box">
         {# 给按钮绑定 弹窗的id #}
-        <button class="btn btn-warning" data-toggle="modal" data-target="#banner-dialog">添加镜像</button>
+        <button class="btn btn-warning" data-toggle="modal" data-target="#banner-dialog">添加主机</button>
     </div>
 
     <table class="table table-bordered">
         <thead>
         <tr>
-            <td>名称</td>
-            <td>内容</td>
-
-            <td>镜像</td>
-            <td>flag</td>
+            <td>主机名</td>
+            <td>主机ip</td>
+            <td>状态</td>
+            <td>任务数</td>
             <td>创建日期</td>
             <td>操作</td>
         </tr>
@@ -53,14 +52,14 @@
 
         <tbody>
                 {% for banner in allbanner %}
-                    <tr data-name="{{ banner.name }}" data-img="{{ banner.image_url }}" data-link="{{ banner.link_url }}" data-priority="{{ banner.priority }}" data-id="{{ banner.id }}">
+                    <tr data-name="{{ banner.name }}" data-img="{{ banner.ip }}" data-link="{{ banner.status }}" data-id="{{ banner.id }}">
                         <td>{{ banner.name }}</td>
 
-                        <td>{{ banner.text }}</td>
-                        <td>{{ banner.image }}</td>
+                        <td>{{ banner.ip }}</td>
 
-                        <td>{{ banner.flag }}</td>
-                        <td>{{ banner.creat_time }}</td>
+                        <td>{{ banner.status }}</td>
+                        <td>{{ banner.worknum }}</td>
+                        <td>{{ banner.create_time }}</td>
                         <td>
 {#                            <button class="btn btn-default btn-xs edit-banner-btn">编辑</button>#}
                             <button class="btn btn-danger btn-xs delete-banner-btn">删除</button>
@@ -82,7 +81,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">添加镜像</h4>
+            <h4 class="modal-title" id="myModalLabel">添加主机</h4>
           </div>
           <div class="modal-body">
             <form action="" id="infoLogoForm" class="form-horizontal">
@@ -90,44 +89,33 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">名称:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="name" placeholder="任务名称">
+                                <input type="text" class="form-control" name="name" placeholder="主机名称">
                             </div>
                         </div>
 
 
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">内容:</label>
+                            <label class="col-sm-2 control-label">IP:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="link_url" placeholder="任务内容">
+                                <input type="text" class="form-control" name="link_url" placeholder="主机IP">
                             </div>
                         </div>
 
 
 
 
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">镜像:</label>
-                            <div class="col-sm-10">
-                                <input type="file" class="form-control" id="img_url" name="img_url" placeholder="任务镜像">
-                            </div>
-{#                            <button class="col-sm-2 btn btn-info" id="upload-btn">添加镜像</button>#}
-                        </div>
-
-
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">类型:</label>
-                            <div class="col-sm-10">
-                                <input type="radio" id=static name=stypeRadio checked="true" value="1"/>静态
-                                <input type="radio"  id=dynamic name=stypeRadio value="2"/>动态
+{#                        <div class="form-group">#}
+{#                            <label class="col-sm-2 control-label">镜像:</label>#}
+{#                            <div class="col-sm-10">#}
 {#                                <input type="file" class="form-control" id="img_url" name="img_url" placeholder="任务镜像">#}
-                            </div>
+{#                            </div>#}
 {#                            <button class="col-sm-2 btn btn-info" id="upload-btn">添加镜像</button>#}
-                        </div>
+{#                        </div>#}
 
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">flag:</label>
+                            <label class="col-sm-2 control-label">状态:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="priority" placeholder="flag">
+                                <input type="text" class="form-control" name="priority" placeholder="主机状态">
                             </div>
                         </div>
 

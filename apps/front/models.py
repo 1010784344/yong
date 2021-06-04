@@ -31,7 +31,7 @@ class FrontUser(db.Model):
     posts = db.relationship('PostModel', backref='author')
     comments = db.relationship('CommentModel', backref='author')
 
-    works = db.relationship('WorkModel', backref='author')
+    works = db.relationship('WorkModel', backref='writer')
 
 
 

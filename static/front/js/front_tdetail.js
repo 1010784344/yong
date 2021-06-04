@@ -36,11 +36,12 @@ function startTimer() {
 
     }
 //将进度条替换为为倒计时页面
-function mysub(){
+function mysub(doname){
                         var tmp = $('#contest-btn')
-                        tmp.html('<div class="extend">\n' +
+
+                        var realtmep = '<div class="extend">\n' +
                         '                    <div class="linkwz">\n' +
-                        '                        <a href="http://eci-2ze56d54cxd7xie6m6kw.cloudeci1.ichunqiu.com:80" title="http://eci-2ze56d54cxd7xie6m6kw.cloudeci1.ichunqiu.com:80" target="_blank">http://eci-2ze56d54cxd7xie6m6kw.cloudeci1.ichunqiu.com:80</a>\n' +
+                        '                        <a href="http" title="http" target="_blank">http</a>\n' +
                         '                    </div>\n' +
                         // '                    <div class="setintover"><span id="cd_h">00 : </span><span id="cd_f">58 : </span><span id="cd_m">57</span>\n' +
                         '                    <div class="setintover">\n' +
@@ -56,7 +57,29 @@ function mysub(){
                         '                        </div>\n' +
                         '\n' +
                         '\n' +
-                        '                    </div>')
+                        '                    </div>'
+
+                        realtmep = realtmep.replace("http", doname)
+                        tmp.html(realtmep)
+                        // tmp.html('<div class="extend">\n' +
+                        // '                    <div class="linkwz">\n' +
+                        // '                        <a href="http://eci-2ze56d54cxd7xie6m6kw.cloudeci1.ichunqiu.com:80" title="http://eci-2ze56d54cxd7xie6m6kw.cloudeci1.ichunqiu.com:80" target="_blank">http://eci-2ze56d54cxd7xie6m6kw.cloudeci1.ichunqiu.com:80</a>\n' +
+                        // '                    </div>\n' +
+                        // // '                    <div class="setintover"><span id="cd_h">00 : </span><span id="cd_f">58 : </span><span id="cd_m">57</span>\n' +
+                        // '                    <div class="setintover">\n' +
+                        //     '    <p id="mytime"></p>\n' +
+                        // '\n' +
+                        // '                    </div>\n' +
+                        // '\n' +
+                        // '                        <div class="operation_div">\n' +
+                        // '                            <div class="issued" onclick="">延长时间(<span>3</span>)</div>\n' +
+                        // '                            <div> </div>\n' +
+                        // '                            <div class="issued" onclick="">重新创建</div>\n' +
+                        // '\n' +
+                        // '                        </div>\n' +
+                        // '\n' +
+                        // '\n' +
+                        // '                    </div>')
 
                     }
 
@@ -73,64 +96,80 @@ function guid(){
         return v.toString(16);
 });
 }
+
+
+
 //创建赛题按钮触发进度条和计时器
-// $(function(){
-//    $('#comment-btn').on('click',function(event){
-//        event.preventDefault();
-//        //判断用户是否登录，没有登录就跳转登录页面
-//        var login_tag=$('#login-tag').attr('data-is-login');
-//        if (! login_tag){
-//            window.location='/signin/'
-//        }else{
-//                 // 生成唯一的uuid
-//                 var uuid = guid();
-//                 var obj = $('#contest-btn')
-//                 obj.html('<div  class="progress-div">\n' +
-//                     '\t        <div class="progress">\n' +
-//                     '\t            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: 2%;">2%\n' +
-//                     '\t            </div>\n' +
-//                     '\t        </div>\n' +
-//                     '\t    </div>')
-//                 // 设置定时器,隔段时间请求一次数据
-//                 var sitv = setInterval(function(){
-//                     // prog_url指向请求进度的url，后面会在flask中设置
-//                     var prog_url = '/show_progress/' + uuid
-//                     $.getJSON(prog_url, function(num_progress){
-//                         $('.progress-div').css('visibility', 'visible');
-//                         $('.progress-bar').css('width', num_progress.res + '%');
-//                         $('.progress-bar').css('background', 'Darkorange');
-//                         $('.progress-bar').css('text-align', 'center');
-//                         $('.progress-bar').text(num_progress.res + '%');
-//                     });
-//                 }, 500);
-//             // 点击事件第一个请求地址，发送请求，后台业务开始执行
-//             var this_url = '/progress_data/' + uuid
-//             $.getJSON(this_url, function(res){
-//
-//                 // 清楚定时器
-//                 clearInterval(sitv);
-//                 if(res.res != null){
-//                     $('.progress-bar').css('width', '100%');
-//                     $('.progress-bar').text('100%');
+$(function(){
+   $('#comment-btn').on('click',function(event){
+       event.preventDefault();
+       //判断用户是否登录，没有登录就跳转登录页面
+       var login_tag=$('#login-tag').attr('data-is-login');
+       if (! login_tag){
+           window.location='/signin/'
+       }else{
+            // 生成唯一的uuid
+           var uuid = guid();
+           var this_url = '/acontest/' + uuid
+             var post_id=$('#post-content').attr('data-id');
+            $.getJSON(this_url,{"task_id":post_id}, function(res){
+
+
+            });
+
+
+                var obj = $('#contest-btn')
+                obj.html('<div  class="progress-div">\n' +
+                    '\t        <div class="progress">\n' +
+                    '\t            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: 2%;">2%\n' +
+                    '\t            </div>\n' +
+                    '\t        </div>\n' +
+                    '\t    </div>')
+                // 设置定时器,隔段时间请求一次数据
+                var sitv = setInterval(function(){
+                    // prog_url指向请求进度的url，后面会在flask中设置
+                    var prog_url = '/show_progress/' + uuid
+                    $.getJSON(prog_url, function(num_progress){
+                        $('.progress-div').css('visibility', 'visible');
+                        $('.progress-bar').css('width', num_progress.res + '%');
+                        $('.progress-bar').css('background', 'Darkorange');
+                        $('.progress-bar').css('text-align', 'center');
+                        $('.progress-bar').text(num_progress.res + '%');
+                    });
+                }, 500)
+            // 触发后台存储数据业务开始执行,后台返回数据之后，getjson 下面的js代码才会继续执行
+
+             var tmp_url = '/progress_data/' + uuid
+            $.getJSON(tmp_url, function(res){
+                console.log(11111)
+                console.log('#######')
+                console.log(res)
+
+                // 清楚定时器
+                clearInterval(sitv);
+                if(res.res == '100'){
+                    $('.progress-bar').css('width', '100%');
+                    $('.progress-bar').text('100%');
 //
 //                     //进度条换成倒计时 html 代码块
-//                     mysub()
-//                     //倒计时定时任务开启
-//                     startTimer();
-//
-//
-//
-//
-//                 }else{
-//                     $('.progress-bar').css('background', 'red');
-//                     setTimeout(function(){
-//                         alert('失败了!');
-//                     }, 1);
-//                 }
-//             })
-//     }
-//        })
-// })
+                        var doname = res.domains
+                    mysub(doname)
+                    //倒计时定时任务开启
+                    startTimer();
+
+
+
+
+                }else{
+                    $('.progress-bar').css('background', 'red');
+                    setTimeout(function(){
+                        alert('失败了!');
+                    }, 1);
+                }
+            })
+    }
+       })
+})
 
 
 
@@ -166,34 +205,34 @@ function guid(){
 // });
 
 
-//创建赛题
-$(function(){
-   $('#comment-btn').on('click',function(event){
-       event.preventDefault();
-       //判断用户是否登录，没有登录就跳转登录页面
-       var login_tag=$('#login-tag').attr('data-is-login');
-       if (! login_tag){
-           window.location='/signin/'
-       }else{
-           // var content=window.ue.getContent();
-           var post_id=$('#post-content').attr('data-id');
-           zlajax.get({
-              // 'url':'/acomment/' ,
-               'url':'/acontest/' ,
-               'data':{
-                  // 'content':content,
-                   'task_id':post_id
-               },
-               'success':function(data){
-                  if(data['code']==200){
-                      zlalert.alertSuccessToast(msg='任务创建成功');
-                      // window.location.reload();
-                  }else{
-                        zlalert.alertInfo(data['message']);
-                  }
-               }
-           });
-       }
-
-   });
-});
+//创建赛题（无进度条）
+// $(function(){
+//    $('#comment-btn').on('click',function(event){
+//        event.preventDefault();
+//        //判断用户是否登录，没有登录就跳转登录页面
+//        var login_tag=$('#login-tag').attr('data-is-login');
+//        if (! login_tag){
+//            window.location='/signin/'
+//        }else{
+//            // var content=window.ue.getContent();
+//            var post_id=$('#post-content').attr('data-id');
+//            zlajax.get({
+//               // 'url':'/acomment/' ,
+//                'url':'/acontest/' ,
+//                'data':{
+//                   // 'content':content,
+//                    'task_id':post_id
+//                },
+//                'success':function(data){
+//                   if(data['code']==200){
+//                       zlalert.alertSuccessToast(msg='任务创建成功');
+//                       // window.location.reload();
+//                   }else{
+//                         zlalert.alertInfo(data['message']);
+//                   }
+//                }
+//            });
+//        }
+//
+//    });
+// });

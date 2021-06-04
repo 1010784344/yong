@@ -12,7 +12,6 @@ SECRET_KEY = 'man man lai'
 # 将 cms 后台用来保存 user.id 的 key ，提取为一个全局变量
 CMS_USER_ID = 'cms_user_id'
 FRONT_USER_ID = 'front_user_id'
-SERVER_NAME = "0.0.0.0:5000"
 
 # 邮箱配置信息
 MAIL_SERVER = "SMTP.qq.com"
@@ -39,13 +38,22 @@ PER_PAGE = 10
 
 
 # celery 的相关配置
-CELERY_RESULT_BACKEND = 'redis://@127.0.0.1:6379/0'
-CELERY_BROKER_URL = 'redis://@127.0.0.1:6379/0'
+CELERY_RESULT_BACKEND = 'redis://@127.0.0.1:6379/1'
+CELERY_BROKER_URL = 'redis://@127.0.0.1:6379/1'
 
 
 #路径配置相关信息
 APPS_DIR = os.path.dirname(__file__)
-UPLOADED_dir = os.path.join(APPS_DIR,'tasks')
+UPLOADED_dir = os.path.join(APPS_DIR,'contests')
+CONF_info = """server {
+    listen       80;
+    server_name %s.testnginx.com;
+
+    location / {
+        proxy_pass   http://192.168.141.177:%s;
+    }
+
+}"""
 
 
 progress_mydata = {}

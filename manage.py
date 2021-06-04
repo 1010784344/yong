@@ -14,6 +14,7 @@ CMPermission = cms_modles.CMPermission
 
 PostModel = apps_modles.PostModel
 BoardModel = apps_modles.BoardModel
+PortModel = apps_modles.PortModel
 
 FrontUser = front_modles.FrontUser
 # flask_script 里的 manager（有了这个才会支持在命令行执行代码的行为）
@@ -138,6 +139,20 @@ def create_test_post():
         db.session.add(post)
         db.session.commit()
     print('恭喜！测试帖子添加成功！')
+
+# python manage.py create_test_port
+# 命令行批量创建端口号
+@manager.command
+def create_test_port():
+
+    for i in range(1001,1500):
+        # 5 表示未被占用
+
+        port = PortModel(name=str(i), status=str(5))
+
+        db.session.add(port)
+        db.session.commit()
+    print('恭喜！测试端口添加成功！')
 
 
 

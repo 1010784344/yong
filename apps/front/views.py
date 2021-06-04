@@ -1,15 +1,19 @@
 # -*- coding: utf-8 -*-
 # from apps.front import bp
 import os
+import shortuuid
 from flask import Blueprint,views,render_template,request,jsonify,session,url_for,g,abort
 from apps.front.forms import SignupForm,SigninForm,AddPostForm,AddCommentForm
-from apps.models import BannersModel,BoardModel,PostModel,CommentModel,HighlightPostModel,TaskModel,WorkModel
+from apps.models import BannersModel,BoardModel,PostModel,CommentModel,HighlightPostModel,TaskModel,WorkModel,PortModel,HostModel
 from apps.front.models import FrontUser
 from apps.front.decorators import LoginRequired
 from exts import alidayu,db,mydocker
 from utils import safeutils
 import config
 from flask_paginate import Pagination,get_page_parameter
+from tasks import create_contest
+import redis
+redisex = redis.Redis(host='127.0.0.1', port=6379, db=0)
 
 from sqlalchemy import func
 
@@ -239,38 +243,142 @@ def acomment():
 
         return jsonify({'code': '400', 'message': message})
 
-# 创建赛题
-@front_bp.route('/acontest/',methods=['GET'])
+# 创建任务
+@front_bp.route('/acontest/<uuid>',methods=['GET'])
+# @front_bp.route('/acontest/',methods=['GET'])
 @LoginRequired
-def acontest():
-
+def acontest(uuid):
+    # uuid = 'hakulamatata'
     task_id = request.args.get("task_id")
 
     task = TaskModel.query.get(task_id)
 
+
     if not task:
         return jsonify({'code': '400', 'message': '没有这个赛题！'})
     else:
-        work = WorkModel(task_flag='11111')
+        # 一个人一次只能做一道题，之前做到一半的题就会结束，做这道题，就会把上一道题干掉
+        # user_id = g.front_user.id
+        # works = WorkModel.query.filter_by(task_status=1).all()
+        #
+        # if not works:
+        #     work = WorkModel(task_flag='11111')
+        # elif len(works) == 1:
+        # #如果只有一个，那就停止并重新创建
+        #
+        #     pass
+        # else:
+        #     return jsonify({'code': '400', 'message': '创建失败！'})
+
+
+
+
+        work = WorkModel(task_flag='11111',author_id=g.front_user.id)
+
+        if task.type == 'dynamic':
+
+            taskflag = shortuuid.uuid()[:4]
+            work.task_flag = taskflag
+
         work.tasks = task
-        work.author = g.front_user
-        # tar包 转移到对应的机器
-        taskpath = os.path.join(config.UPLOADED_dir, task.name+os.sep+task.image)
-        import shutil
-        tmppath = '/home/srv'
-        shutil.copy(taskpath,tmppath)
 
-        realpath = tmppath+os.sep+task.image
-        # 加载镜像
-        with open(realpath, 'rb') as fp:
-            img = mydocker.images.load(fp.read())
+        work.writer = g.front_user
+        # work.id = uuid
+        from sqlalchemy import func
+        host = db.session.query(HostModel).order_by(func.count(HostModel.works)).first()
+        # len(HostModel.works)
+        # 获取空闲的主机
+        # host = HostModel.query.filter_by(status='1').first()
+        tmpip = host.ip
+        tmphost = host.name
+        # work.hosts = host
+        # 获取空闲的端口号
+        if tmphost == 'host1':
+            # 获取空闲的端口号
+            port = PortModel.query.filter_by(host1='5').first()
+            tmpport = port.name
+            port.host1 = "10"
+        elif tmphost == 'host2':
+            # 获取空闲的端口号
+            port = PortModel.query.filter_by(host2='5').first()
+            tmpport = port.name
+            port.host2 = "10"
 
-        imagename = img[0].tags
+        # work.hostport = '192.168.141.177:%s'%tmpport
+        work.hostport = '%s:%s'%(tmpip,tmpport)
+        work.task_status = '1'
+        # 容器创建完毕之后，修改port 的状态
+        # port.status = "10"
+        # 异步启动创建流程
+        create_contest.delay(uuid,task.name,task.image,port.name,taskflag)
+        """
+        
+        """
 
-        # 创建容器
-        mydocker.containers.create_container(imagename, name='yong1', stdin_open=True, tty=True)
+        # import redis
+        #
+        # redisex = redis.Redis(host='127.0.0.1', port=6379, db=0)
+        # redisex.hset(work.id, 'progress',0)
+        #
+        #
+        #
+        #
+        # # tar包 转移到对应的机器（有可能跨机器暂未实现）
+        # taskpath = os.path.join(config.UPLOADED_dir, task.name+os.sep+task.image)
+        # import shutil
+        # tmppath = '/home/srv'
+        # # 本地 tar 包目录
+        # realpath = tmppath + os.sep + task.image
+        # if not os.path.exists(realpath):
+        #     shutil.copy(taskpath,tmppath)
+        #
+        # redisex.hset(work.id, 'progress', 20)
+        #
+        # try:
+        #     # 检查 nginx 镜像是否存在（反向代理必须要有的镜像）
+        #     img = mydocker.images.get("nginx")
+        #     imagename = img.tags[0].split(':')[0]
+        # except Exception as e:
+        #     # 加载镜像
+        #     with open(realpath, 'rb') as fp:
+        #         img = mydocker.images.load(fp.read())
+        #         # 获取镜像名称
+        #     imagename = img[0].tags
+        # redisex.hset(work.id, 'progress', 40)
 
 
+        # imagename = 'nginx'
+
+        # 创建代理容器
+        """
+        
+        
+        
+        """
+
+
+        # 赛题创建容器
+        # tmpdocker = mydocker.containers.run(imagename, name=tmpname,ports= {'80/tcp': ('192.168.141.177', tmpport)}, tty=True,detach=True)
+        #
+
+        # import shortuuid
+        # tmpuuid = shortuuid.uuid()
+        # redisex.hset(work.id, 'progress', 60)
+        #
+        #
+        #
+        # # 配置代理配置文件
+        # confinfo = config.CONF_info%(tmpuuid,tmpport)
+        # f = open("/home/wang/nginx/conf.d/%s.conf"%tmpname,"w")
+        # f.write(confinfo)
+        # f.close()
+        #
+        # redisex.hset(work.id, 'progress', 80)
+        # # 获取代理容器并再代理容器重新加载 nginx 配置文件
+        # pro = mydocker.containers.get("proxy-ng")
+        # pro.exec_run("nginx -s reload")
+        # redisex.hset(work.id, 'progress', 100)
+        # redisex.hset(work.id, 'domain', '%s.testnginx.com' % tmpuuid)
 
 
         db.session.add(work)
@@ -280,24 +388,85 @@ def acontest():
         return jsonify({'code': '200', 'message': '成功！'})
 
 
+# 删除任务
+@front_bp.route('/dcontest/', methods=['GET'])
+@LoginRequired
+def dcontest():
+    task_id = request.args.get("task_id")
+
+    task = TaskModel.query.get(task_id)
+
+    if not task:
+        return jsonify({'code': '400', 'message': '没有这个赛题！'})
+    else:
+        # 容器名称就是赛题名称
+        user_id = g.front_user.id
+        work = WorkModel.query.filter_by(task_id=task_id,author_id=user_id).first()
+        work.task_status = 2
+        tmpname = task.name
+        tmpport = work.hostport.split(':')[1]
+
+        tmpip = work.hostport.split(':')[0]
+
+        if tmpip == '192.168.141.177':
+            # 将端口号设置为空闲状态
+            port = PortModel.query.filter_by(name=tmpport).first()
+            port.host1 = '5'
+        elif tmpip == '192.168.141.178':
+            # 将端口号设置为空闲状态
+            port = PortModel.query.filter_by(name=tmpport).first()
+            port.host2 = '5'
+
+        import redis
+
+        redisex = redis.Redis(host='127.0.0.1', port=6379, db=0)
+        redisex.hdel(work.id, 'progress')
+        redisex.hdel(work.id, 'domain')
+
+
+        # 获取赛题容器
+        tmpdocker = mydocker.containers.get(tmpname)
+        tmpdocker.remove(force=True)
+
+        confpath = "/home/wang/nginx/conf.d/%s.conf" % tmpname
+        if os.path.exists(confpath):
+            os.remove(confpath)
+
+        pro = mydocker.containers.get("proxy-ng")
+        pro.exec_run("nginx -s reload")
+
+
+        db.session.add(work)
+        db.session.commit()
+
+        return jsonify({'res': '200', 'message': '成功！'})
+
 
 @front_bp.route('/progress_data/<uuid>')
 def progress_data(uuid):
     '''
     通过uuid将数据存入变量progress_data
     '''
-    for i in range(12345666):
-        num_progress = round(i * 100 / 12345665, 2)
+    while True:
+        tmpdata = redisex.hget(uuid, 'progress')
+        if tmpdata == '100':
+            break
+    domain = redisex.hget(uuid, 'domain')
 
-        config.progress_mydata[uuid] = num_progress
-    return jsonify({'res': num_progress})
+    return jsonify({'res': tmpdata,'domains':domain})
 
 @front_bp.route('/show_progress/<uuid>')
 def show_progress(uuid):
     '''
     前端请求进度的函数
     '''
-    return jsonify({'res': config.progress_mydata[uuid]})
+    try:
+        tmpdata = redisex.hget(uuid, 'progress')
+    except Exception as e:
+        tmpdata = 0
+
+
+    return jsonify({'res': tmpdata})
 
 
 

@@ -86,10 +86,12 @@ class WorkModel(db.Model):
     task_time = db.Column(db.DateTime, default=datetime.now)
     task_score = db.Column(db.Integer, default=0)
     task_flag = db.Column(db.String(255), nullable=False)
+    hostport = db.Column(db.String(255), nullable=True)
 
     # 一个work只能属于一个赛题，一个work只能有一个人
     task_id = db.Column(db.String(100), db.ForeignKey('task.id'))
     author_id = db.Column(db.String(100),db.ForeignKey('front_user.id'),nullable=False)
+    # host_id = db.Column(db.Integer,db.ForeignKey('host.id'))
 
 
 
@@ -101,6 +103,27 @@ class HighlightPostModel(db.Model):
     id = db.Column(db.Integer, primary_key= True,autoincrement=True)
     create_time = db.Column(db.DateTime,default=datetime.now)
     post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
+
+
+
+class PortModel(db.Model):
+    __tablename__ = 'port'
+    id = db.Column(db.Integer, primary_key= True,autoincrement=True)
+    name = db.Column(db.String(255), nullable=False)
+    host1 = db.Column(db.String(255), nullable=True)
+    host2 = db.Column(db.String(255), nullable=True)
+    #host1 如果为5，则没有被占用，如果为10则被占用
+
+class HostModel(db.Model):
+    __tablename__ = 'host'
+    id = db.Column(db.Integer, primary_key= True,autoincrement=True)
+    name = db.Column(db.String(255), nullable=False)
+    ip = db.Column(db.String(255), nullable=False)
+    status = db.Column(db.String(255), nullable=False)
+    create_time = db.Column(db.DateTime, default=datetime.now)
+    worknum = db.Column(db.Integer, default=0)
+    # 一个主机有多个work
+    # works = db.relationship('WorkModel', backref='hosts')
 
 if __name__ == '__main__':
     pass

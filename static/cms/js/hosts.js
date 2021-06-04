@@ -10,32 +10,26 @@ $(function () {
         var nameInput = $("input[name='name']");
 
 
-        var imgInput = $("input[name='img_url']");
+        var ipInput = $("input[name='link_url']");
 
-        var linkInput = $("input[name='link_url']");
+        var statusInput = $("input[name='priority']");
 
-        var priorityInput = $("input[name='priority']");
+        // var priorityInput = $("input[name='priority']");
 
-        var typeInput = $("input[name='stypeRadio']:checked");
 
         var name = nameInput.val();
-
-        var img_url = imgInput.val();
-
-        var link_url = linkInput.val();
-
-        var priority = priorityInput.val();
-
-        var contesttype = typeInput.val();
-        console.log(contesttype)
-
-        console.log(1111111)
-
+        console.log(name)
+        var ip = ipInput.val();
+        console.log(ip)
+        var status = statusInput.val();
+        console.log(status)
+        // var priority = priorityInput.val();
+        // console.log(priority)
         var submitType = self.attr('data-type');
-        // var bannerId = self.attr('data-id');
+        var bannerId = self.attr('data-id');
+        console.log("22222")
 
-
-        if (!name || !img_url || !link_url || !priority|| !contesttype) {
+        if (!name || !ip || !status) {
             zlalert.alertInfo('请输入所有数据');
             return;
         }
@@ -46,37 +40,16 @@ $(function () {
         if (submitType == 'update') {
             url = '/cms/ubanner/';
         } else {
-            url = '/cms/atask/'
+            url = '/cms/ahost/'
         }
-
-        var  fileObj = document.getElementById( "img_url" ).files[0];
-
-        var formData = new FormData();
-        formData.append('name', name);
-        formData.append('link_url', link_url);
-        formData.append('priority', priority);
-        formData.append('img_url', fileObj);
-        formData.append('stypeRadio', contesttype);
-
-
-
-
-
-
-
         zlajax.post({
             'url': url,
-            // 'data': {
-            //     'name': name,
-            //     'img_url': formData,
-            //     'link_url': link_url,
-            //     'priority': priority,
-            //     'banner_id': bannerId
-            // },
-            processData: false,
-            contentType: false,
-
-            'data':formData,
+            'data': {
+                'name': name,
+                'ip': ip,
+                'status': status,
+                'banner_id': bannerId
+            },
             'success': function (data) {
                 if (data['code'] == 200) {
                     //点击保存，弹窗就隐身
@@ -125,7 +98,7 @@ $(function () {
     });
 });
 
-//镜像删除数据弹窗
+//主机删除数据弹窗
 $(function () {
     $('.delete-banner-btn').on('click', function () {
         var banner_id = $(this).parent().parent().attr('data-id');
@@ -133,7 +106,7 @@ $(function () {
             'msg': '确定要删除这条状态吗?',
             'confirmCallback': function () {
                 zlajax.post({
-                    'url': '/cms/dtask/',
+                    'url': '/cms/dhost/',
                     'data': {
                         'banner_id': banner_id
                     },

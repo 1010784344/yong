@@ -1,0 +1,82 @@
+{% extends 'cms/cms_base.html' %}
+{%  from 'common/_macros.html' import static %}
+
+
+{% block title %}
+    任务管理
+{% endblock %}
+
+{% block page_title %}
+    任务管理
+{% endblock %}
+
+
+{% block head %}
+    <script src="https://cdn.staticfile.org/Plupload/2.1.1/moxie.js"></script>
+    <script src="https://cdn.staticfile.org/Plupload/2.1.1/plupload.dev.js"></script>
+    <script src="https://cdn.staticfile.org/qiniu-js-sdk/1.0.14-beta/qiniu.js"></script>
+    <script src="{{ static('common/zlqiniu.js') }}"></script>
+    <script src="{{ static('cms/js/task.js') }}"></script>
+
+    <style>
+
+        .top-box button{
+            float: right;
+        }
+
+
+    </style>
+
+{% endblock %}
+
+
+
+{% block main_content %}
+
+    <div class="top-box">
+
+
+    </div>
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <td>用户</td>
+            <td>赛题</td>
+
+            <td>主机</td>
+            <td>状态</td>
+            <td>创建日期</td>
+            <td>操作</td>
+        </tr>
+        </thead>
+
+        <tbody>
+                {% for banner in allbanner %}
+                    <tr data-name="{{ banner.name }}" data-img="{{ banner.image_url }}" data-link="{{ banner.link_url }}" data-priority="{{ banner.priority }}" data-id="{{ banner.id }}">
+                        <td>{{ banner.writer.username }}</td>
+
+                        <td>{{ banner.tasks.name }}</td>
+                        <td>{{ banner.hostport }}</td>
+
+                        <td>{{ banner.task_status }}</td>
+                        <td>{{ banner.task_time }}</td>
+                        <td>
+{#                            <button class="btn btn-default btn-xs edit-banner-btn">编辑</button>#}
+                            <button class="btn btn-danger btn-xs delete-banner-btn">回收</button>
+                        </td>
+
+                    </tr>
+                {% endfor %}
+
+
+
+        </tbody>
+    </table>
+
+
+
+
+
+
+{% endblock %}

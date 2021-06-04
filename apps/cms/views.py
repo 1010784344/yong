@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint,render_template,views,request,redirect,url_for,session,g,jsonify
-from apps.cms.forms import LoginForm,ResetpwdForm,ResetemailForm,AddBannerForm,UpdateBannerForm,AddBoardForm,UpdateBoardForm,AddTaskForm
+from apps.cms.forms import LoginForm,ResetpwdForm,ResetemailForm,AddBannerForm,UpdateBannerForm,AddBoardForm,UpdateBoardForm,AddTaskForm,AddHostForm
 from apps.cms.models import CMSUser,CMPermission
-from apps.models import BannersModel,BoardModel,PostModel,HighlightPostModel,TaskModel
+from apps.models import BannersModel,BoardModel,PostModel,HighlightPostModel,TaskModel,WorkModel,HostModel
 import config
 from apps.cms.decorators import LoginRequired,permission_required
 from exts import db,mail
@@ -11,7 +11,7 @@ from flask_mail import Message
 import string
 import random
 import os
-from tasks import send_email
+from tasks import send_email,image_up
 
 # 定义 cms 的蓝图
 cms_bp = Blueprint('cms',__name__,url_prefix='/cms')
@@ -98,9 +98,82 @@ def banners():
 
     return render_template('cms/cms_banners.html',allbanner=allbanner)
 
+# 主机管理
+@cms_bp.route('/hosts/')
+@LoginRequired
+def hosts():
+
+    allhost = HostModel.query.all()
+
+    return render_template('cms/cms_hosts.html',allbanner=allhost)
+
+
+#添加主机弹窗 的提交表单
+@cms_bp.route('/ahost/',methods = ['POST'])
+@LoginRequired
+def ahost():
+
+    form = AddHostForm(request.form)
+
+    if form.validate():
+        name = form.name.data
+        ip = form.ip.data
+        status = form.status.data
+
+
+        host = HostModel(name=name, ip=ip,status=status)
+
+
+
+        db.session.add(host)
+        db.session.commit()
+
+        return jsonify({'code': '200', 'message': '主机添加成功！'})
+    else:
+
+        message = form.errors.popitem()[1][0]
+        # 表单验证错误（数据格式不对）
+
+        return jsonify({'code': '400', 'message': message})
+
+
+#删除主机弹窗 的提交表单
+@cms_bp.route('/dhost/',methods = ['POST'])
+@LoginRequired
+def dhost():
+
+    hostid = request.form.get('banner_id')
+
+    if not hostid:
+        return jsonify({'code': '400', 'message': '主机id不存在！'})
+
+
+    host = HostModel.query.get(hostid)
+    if not host:
+        return jsonify({'code': '400', 'message': '主机不存在！'})
+
+
+    db.session.delete(host)
+    db.session.commit()
+    return jsonify({'code': '200', 'message': '主机删除成功！'})
+
+
+
+
+
 
 
 # 任务管理
+@cms_bp.route('/works/')
+@LoginRequired
+def works():
+
+    allwork = WorkModel.query.all()
+
+    return render_template('cms/cms_works.html',allbanner=allwork)
+
+
+# 镜像管理
 @cms_bp.route('/tasks/')
 @LoginRequired
 def tasks():
@@ -109,7 +182,10 @@ def tasks():
 
     return render_template('cms/cms_tasks.html',allbanner=alltask)
 
-#添加任务弹窗 的提交表单
+
+
+
+#添加镜像弹窗 的提交表单
 @cms_bp.route('/atask/',methods = ['POST'])
 @LoginRequired
 def atask():
@@ -121,29 +197,64 @@ def atask():
         img_url = request.files['img_url']
         flag_url = form.link_url.data
         text = form.priority.data
-
+        tmpstyple = form.stypeRadio.data
         filename = img_url.filename
-
-        taskpath = os.path.join(config.UPLOADED_dir,name)
+        if tmpstyple == '1':
+            type = 'static'
+        elif tmpstyple == '2':
+            type = 'dynamic'
+        # image_up.delay(img_url,name,filename)
+        taskpath = os.path.join(config.UPLOADED_dir, name)
         if not os.path.exists(taskpath):
             os.makedirs(taskpath)
         img_url.save(os.path.join(taskpath, filename))
 
-
-        task = TaskModel(name=name, image=filename,flag=flag_url,text=text,type='web')
+        task = TaskModel(name=name, image=filename,flag=flag_url,text=text,type=type)
 
 
 
         db.session.add(task)
         db.session.commit()
 
-        return jsonify({'code': '200', 'message': '任务添加成功！'})
+        return jsonify({'code': '200', 'message': '镜像添加成功！'})
     else:
 
         message = form.errors.popitem()[1][0]
         # 表单验证错误（数据格式不对）
 
         return jsonify({'code': '400', 'message': message})
+
+
+
+#删除镜像弹窗 的提交表单
+@cms_bp.route('/dtask/',methods = ['POST'])
+@LoginRequired
+def dtask():
+
+    taskid = request.form.get('banner_id')
+
+    if not taskid:
+        return jsonify({'code': '400', 'message': '镜像id不存在！'})
+
+
+    task = TaskModel.query.get(taskid)
+    if not task:
+        return jsonify({'code': '400', 'message': '镜像不存在！'})
+
+    name = task.name
+    imagename = task.image
+
+    taskpath = os.path.join(config.UPLOADED_dir, name)
+    imagepath = os.path.join(taskpath,imagename)
+    if os.path.exists(imagepath):
+        os.remove(imagepath)
+
+    db.session.delete(task)
+    db.session.commit()
+    return jsonify({'code': '200', 'message': '镜像删除成功！'})
+
+
+
 
 
 

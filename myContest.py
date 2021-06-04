@@ -20,11 +20,6 @@ app.config.from_object(config)
 # 注册 sqlalchemy 到 app 里面
 db.init_app(app)
 
-# 注册邮箱对象 到 app 里面
-mail.init_app(app)
-#  注册短信验证码 到 app 里面
-alidayu.init_app(app)
-
 
 # csrf 保护
 CSRFProtect(app)
@@ -38,4 +33,4 @@ app.register_blueprint(ued_bp)
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0')

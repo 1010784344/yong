@@ -62,16 +62,36 @@
             <div class="form-group" style="width: 100%; overflow: hidden;">
                             <label class="col-sm-2">Flag:</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="img_url" >
+                                <input type="text" class="form-control" name="flaginfo" >
                             </div>
-                            <button class="col-sm-2 btn btn-info" id="upload-btn">提交</button>
+                            <button class="col-sm-2 btn btn-info" id="flag-btn" onclick="subflag()" >提交</button>
             </div>
 
         </div>
 
     </div>
 
+    <div class="sm-container">
 
+        <div class="list-group">
+
+                <span class="list-group-item">解题排名</span>
+
+            {% for rank in ranks %}
+                <div class="list-group-item">
+                <span>{{ loop.index }}.</span>
+                <span>{{ rank.writer.username }}</span>
+{#                <span>{{ rank.task_score }}</span>#}
+                </div>
+
+
+
+            {% endfor %}
+
+
+        </div>
+
+    </div>
 
 
 

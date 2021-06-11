@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from exts import db,mail,alidayu
+from exts import db
 from flask import Flask
 
 from flask_wtf import CSRFProtect

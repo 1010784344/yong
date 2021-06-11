@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 import os
+import redis
 from celery import Celery
 from flask import Flask
 import config
@@ -56,9 +57,8 @@ def image_up(img_url,name,filename):
 
 # 定义一个创建赛题的任务
 @celery.task
-def create_contest(work_id,task_name,task_image,port_name,taskflag):
+def create_contest(tmpuuid,work_id,task_name,task_image,port_name,taskflag,hostip):
 
-    import redis
 
     redisex = redis.Redis(host='127.0.0.1', port=6379, db=0)
     redisex.hset(work_id, 'progress', 0)
@@ -95,10 +95,11 @@ def create_contest(work_id,task_name,task_image,port_name,taskflag):
 
     """
     import shortuuid
-    tmpuuid = shortuuid.uuid()
+
+    redisex.hset(work_id, 'domain', '%s.testnginx.com' % tmpuuid)
 
     # 赛题创建容器
-    tmpdocker = mydocker.containers.run(imagename, name=tmpuuid, ports={'80/tcp': ('192.168.141.177', port_name)},
+    tmpdocker = mydocker.containers.run(imagename, name=tmpuuid, ports={'80/tcp': (hostip, port_name)},
                                         tty=True, detach=True)
 
     # import shortuuid
@@ -107,7 +108,7 @@ def create_contest(work_id,task_name,task_image,port_name,taskflag):
 
     # 配置代理配置文件
     confinfo = config.CONF_info % (tmpuuid, port_name)
-    f = open("/home/wang/nginx/conf.d/%s.conf" % task_name, "w")
+    f = open("/home/wang/nginx/conf.d/%s.conf" % tmpuuid, "w")
     f.write(confinfo)
     f.close()
 
@@ -121,7 +122,10 @@ def create_contest(work_id,task_name,task_image,port_name,taskflag):
         addflag.exec_run("sh -c 'echo %s > /flag.txt'"%taskflag)
 
     redisex.hset(work_id, 'progress', 100)
-    redisex.hset(work_id, 'domain', '%s.testnginx.com' % tmpuuid)
+    print(tmpuuid)
+    redisex.hset(work_id, 'workname', tmpuuid)
+
+    # redisex.hset(work_id, 'domain', '%s.testnginx.com' % tmpuuid)
     print("赛题创建成功")
 
 

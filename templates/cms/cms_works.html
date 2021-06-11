@@ -16,7 +16,7 @@
     <script src="https://cdn.staticfile.org/Plupload/2.1.1/plupload.dev.js"></script>
     <script src="https://cdn.staticfile.org/qiniu-js-sdk/1.0.14-beta/qiniu.js"></script>
     <script src="{{ static('common/zlqiniu.js') }}"></script>
-    <script src="{{ static('cms/js/task.js') }}"></script>
+    <script src="{{ static('cms/js/work.js') }}"></script>
 
     <style>
 
@@ -43,9 +43,11 @@
         <tr>
             <td>用户</td>
             <td>赛题</td>
-
+            <td>任务名称</td>
+            <td>任务flag</td>
             <td>主机</td>
             <td>状态</td>
+            <td>得分</td>
             <td>创建日期</td>
             <td>操作</td>
         </tr>
@@ -57,9 +59,13 @@
                         <td>{{ banner.writer.username }}</td>
 
                         <td>{{ banner.tasks.name }}</td>
+
+                        <td>{{ banner.task_name }}</td>
+                        <td>{{ banner.task_flag }}</td>
                         <td>{{ banner.hostport }}</td>
 
                         <td>{{ banner.task_status }}</td>
+                        <td>{{ banner.task_score }}</td>
                         <td>{{ banner.task_time }}</td>
                         <td>
 {#                            <button class="btn btn-default btn-xs edit-banner-btn">编辑</button>#}

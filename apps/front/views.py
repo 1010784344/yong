@@ -2,7 +2,7 @@
 # from apps.front import bp
 import os
 import shortuuid
-from flask import Blueprint,views,render_template,request,jsonify,session,url_for,g,abort
+from flask import Blueprint,views,render_template,request,jsonify,session,url_for,g,abort,redirect
 from apps.front.forms import SignupForm,SigninForm,AddPostForm,AddCommentForm
 from apps.models import BannersModel,BoardModel,PostModel,CommentModel,HighlightPostModel,TaskModel,WorkModel,PortModel,HostModel
 from apps.front.models import FrontUser
@@ -88,8 +88,8 @@ def index():
 
                }
 
+    return render_template('front/front_index.html', **context)
 
-    return render_template('front/front_index.html',**context)
 
 
 # 测试：短信验证测试接口(其他方面都正常，就接口有问题（appkey-not-exists），暂时放过)
@@ -205,11 +205,15 @@ def post_detail(post_id):
 def task_detail(post_id):
     post = TaskModel.query.get(post_id)
 
+    ranks = WorkModel.query.filter_by(task_status=2, task_id=post_id). \
+        order_by(WorkModel.task_score.desc()).limit(5)
+
+
     if not post:
         #如果帖子不存在，手动抛出一个异常
         abort(404)
     else:
-        return render_template('front/front_tdetail.html',post=post)
+        return render_template('front/front_tdetail.html',post=post,ranks=ranks)
 
 
 
@@ -258,60 +262,42 @@ def acontest(uuid):
         return jsonify({'code': '400', 'message': '没有这个赛题！'})
     else:
         # 一个人一次只能做一道题，之前做到一半的题就会结束，做这道题，就会把上一道题干掉
-        # user_id = g.front_user.id
-        # works = WorkModel.query.filter_by(task_status=1).all()
-        #
-        # if not works:
-        #     work = WorkModel(task_flag='11111')
-        # elif len(works) == 1:
-        # #如果只有一个，那就停止并重新创建
-        #
-        #     pass
-        # else:
-        #     return jsonify({'code': '400', 'message': '创建失败！'})
+        work = WorkModel(task_flag='',author_id=g.front_user.id)
 
-
-
-
-        work = WorkModel(task_flag='11111',author_id=g.front_user.id)
-
+        # 如果是动态 flag 添加 动态flag
         if task.type == 'dynamic':
-
             taskflag = shortuuid.uuid()[:4]
             work.task_flag = taskflag
+        else:
+            taskflag = ''
 
         work.tasks = task
-
+        work.task_name = shortuuid.uuid()
         work.writer = g.front_user
-        # work.id = uuid
-        from sqlalchemy import func
-        host = db.session.query(HostModel).order_by(func.count(HostModel.works)).first()
-        # len(HostModel.works)
-        # 获取空闲的主机
-        # host = HostModel.query.filter_by(status='1').first()
-        tmpip = host.ip
-        tmphost = host.name
-        # work.hosts = host
-        # 获取空闲的端口号
-        if tmphost == 'host1':
-            # 获取空闲的端口号
-            port = PortModel.query.filter_by(host1='5').first()
-            tmpport = port.name
-            port.host1 = "10"
-        elif tmphost == 'host2':
-            # 获取空闲的端口号
-            port = PortModel.query.filter_by(host2='5').first()
-            tmpport = port.name
-            port.host2 = "10"
 
-        # work.hostport = '192.168.141.177:%s'%tmpport
+        # 获取空闲的主机
+        host = db.session.query(HostModel).order_by(HostModel.worknum).first()
+        host.worknum = host.worknum + 1
+        tmpip = host.ip
+
+        # 获取空闲的端口号
+        port = PortModel.query.filter_by(status='5').first()
+        tmpport = port.name
+        port.host_id = host.id
+
+
         work.hostport = '%s:%s'%(tmpip,tmpport)
         work.task_status = '1'
+
         # 容器创建完毕之后，修改port 的状态
-        # port.status = "10"
+        port.status = "10"
+
         # 异步启动创建流程
-        create_contest.delay(uuid,task.name,task.image,port.name,taskflag)
+        create_contest.delay(work.task_name,uuid,task.name,task.image,port.name,taskflag,host.ip)
         """
+        uuid 前端传递过来的进度唯一标识
+        taskflag 动态flag
+        work.task_name  任务的名称（容器的名称）
         
         """
 
@@ -388,6 +374,107 @@ def acontest(uuid):
         return jsonify({'code': '200', 'message': '成功！'})
 
 
+# 重新创建
+@front_bp.route('/rcontest/<uuid>', methods=['GET'])
+@LoginRequired
+def rcontest(uuid):
+    # 先删除当前的 work
+    workname = request.args.get('work_name')
+    work = WorkModel.query.filter_by(task_name=workname).first()
+    taskid= work.task_id
+
+    work.task_status = 2
+    tmpname = work.task_name
+    tmpport = work.hostport.split(':')[1]
+
+    tmpip = work.hostport.split(':')[0]
+
+    port = PortModel.query.filter_by(name=tmpport).first()
+    port.status = '5'
+    port.host_id = 0
+
+    host = HostModel.query.filter_by(ip=tmpip).first()
+    host.worknum = host.worknum - 1
+
+    redisex = redis.Redis(host='127.0.0.1', port=6379, db=0)
+    # redisex.hdel(work.id, 'progress')
+    # redisex.hdel(work.id, 'domain')
+
+    # 获取赛题容器
+    tmpdocker = mydocker.containers.get(tmpname)
+    tmpdocker.remove(force=True)
+
+    confpath = "/home/wang/nginx/conf.d/%s.conf" % tmpname
+    if os.path.exists(confpath):
+        os.remove(confpath)
+
+    pro = mydocker.containers.get("proxy-ng")
+    pro.exec_run("nginx -s reload")
+
+    db.session.delete(work)
+    db.session.commit()
+
+    return redirect(url_for('front.acontest',uuid=uuid,task_id=taskid))
+
+
+
+
+    # uuid = 'hakulamatata'
+    # task_id = request.args.get("task_id")
+    #
+    # task = TaskModel.query.get(task_id)
+    #
+    # if not task:
+    #     return jsonify({'code': '400', 'message': '没有这个赛题！'})
+    # else:
+    #     # 一个人一次只能做一道题，之前做到一半的题就会结束，做这道题，就会把上一道题干掉
+    #     work = WorkModel(task_flag='11111', author_id=g.front_user.id)
+    #
+    #     # 如果是动态 flag 添加 动态flag
+    #     if task.type == 'dynamic':
+    #         taskflag = shortuuid.uuid()[:4]
+    #         work.task_flag = taskflag
+    #
+    #     work.tasks = task
+    #     work.task_name = shortuuid.uuid()
+    #     work.writer = g.front_user
+    #
+    #     # 获取空闲的主机
+    #     host = db.session.query(HostModel).order_by(HostModel.worknum).first()
+    #     host.worknum = host.worknum + 1
+    #     tmpip = host.ip
+    #
+    #     # 获取空闲的端口号
+    #     port = PortModel.query.filter_by(status='5').first()
+    #     tmpport = port.name
+    #     port.host_id = host.id
+    #
+    #     work.hostport = '%s:%s' % (tmpip, tmpport)
+    #     work.task_status = '1'
+    #
+    #     # 容器创建完毕之后，修改port 的状态
+    #     port.status = "10"
+    #
+    #     # 异步启动创建流程
+    #     create_contest.delay(work.task_name, uuid, task.name, task.image, port.name, taskflag, host.ip)
+    #     """
+    #     uuid 前端传递过来的进度唯一标识
+    #     taskflag 动态flag
+    #
+    #     """
+    #
+    #
+    #
+    #     db.session.add(work)
+    #     db.session.commit()
+    #
+    #     return jsonify({'code': '200', 'message': '成功！'})
+
+
+
+
+
+
 # 删除任务
 @front_bp.route('/dcontest/', methods=['GET'])
 @LoginRequired
@@ -442,6 +529,58 @@ def dcontest():
         return jsonify({'res': '200', 'message': '成功！'})
 
 
+# 提交答案
+@front_bp.route('/aanswer/',methods=['GET'])
+@LoginRequired
+def aanswer():
+    if request.method == 'GET':
+        work_name = request.args.get('work_name')
+        flag_info = request.args.get('flaginfo')
+
+        work = WorkModel.query.filter_by(task_name=work_name).first()
+        realflag = work.task_flag
+        if not realflag:
+            quietid = work.task_id
+            task = TaskModel.query.filter_by(id=quietid).first()
+            realflag = task.flag
+        if flag_info != realflag:
+            work.task_score = 60
+            work.task_status = 2
+            db.session.commit()
+            return jsonify({'code': '200', 'message': '回答错误！'})
+        else:
+            work.task_score = 100
+            work.task_status = 2
+
+            db.session.commit()
+
+            return jsonify({'code': '200', 'message': '回答正确！'})
+
+
+# 得分统计
+@front_bp.route('/scontest/', methods=['GET'])
+@LoginRequired
+def scontest():
+    task_id = request.args.get("task_id")
+
+    task = TaskModel.query.get(task_id)
+
+    if not task:
+        return jsonify({'code': '400', 'message': '没有这个赛题！'})
+
+    boards = WorkModel.query.filter_by(task_status=2,task_id = task_id).\
+        order_by(WorkModel.task_score.desc()).limit(5)
+    # boards = WorkModel.query.order_by(WorkModel.task_score.desc()).limit(5)
+    # boards = WorkModel.query.all()
+    return render_template('front/front_test.html',boards=boards)
+
+
+
+
+
+
+
+
 @front_bp.route('/progress_data/<uuid>')
 def progress_data(uuid):
     '''
@@ -462,11 +601,29 @@ def show_progress(uuid):
     '''
     try:
         tmpdata = redisex.hget(uuid, 'progress')
+        if not tmpdata:
+            tmpdata = 0
+        domain = redisex.hget(uuid, 'domain')
+        workname = redisex.hget(uuid, 'workname')
     except Exception as e:
         tmpdata = 0
+        domain = 'hello'
 
 
-    return jsonify({'res': tmpdata})
+    return jsonify({'res': tmpdata,'domains': domain,'workname':workname})
+
+
+
+@front_bp.route('/flogout/')
+@LoginRequired
+def flogout():
+    session.pop(config.FRONT_USER_ID)
+    return redirect(url_for('front.signin'))
+
+
+
+
+
 
 
 

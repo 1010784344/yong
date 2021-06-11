@@ -87,6 +87,8 @@ class WorkModel(db.Model):
     task_score = db.Column(db.Integer, default=0)
     task_flag = db.Column(db.String(255), nullable=False)
     hostport = db.Column(db.String(255), nullable=True)
+    task_name = db.Column(db.String(255), nullable=True)
+
 
     # 一个work只能属于一个赛题，一个work只能有一个人
     task_id = db.Column(db.String(100), db.ForeignKey('task.id'))
@@ -110,9 +112,8 @@ class PortModel(db.Model):
     __tablename__ = 'port'
     id = db.Column(db.Integer, primary_key= True,autoincrement=True)
     name = db.Column(db.String(255), nullable=False)
-    host1 = db.Column(db.String(255), nullable=True)
-    host2 = db.Column(db.String(255), nullable=True)
-    #host1 如果为5，则没有被占用，如果为10则被占用
+    status = db.Column(db.String(255), default='5')
+    host_id = db.Column(db.Integer, default=0)
 
 class HostModel(db.Model):
     __tablename__ = 'host'
@@ -124,6 +125,8 @@ class HostModel(db.Model):
     worknum = db.Column(db.Integer, default=0)
     # 一个主机有多个work
     # works = db.relationship('WorkModel', backref='hosts')
+    # 一个host 可以使用多个端口
+    # ports = db.relationship('PortModel', backref='rhost')
 
 if __name__ == '__main__':
     pass

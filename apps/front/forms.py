@@ -54,6 +54,8 @@ class AddCommentForm(Form):
     post_id = StringField(validators=[InputRequired(message='请输入帖子 id！')])
 
 
+
+
 if __name__ == '__main__':
     print
     1

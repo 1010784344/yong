@@ -2,10 +2,10 @@
 from flask import Blueprint,render_template,views,request,redirect,url_for,session,g,jsonify
 from apps.cms.forms import LoginForm,ResetpwdForm,ResetemailForm,AddBannerForm,UpdateBannerForm,AddBoardForm,UpdateBoardForm,AddTaskForm,AddHostForm
 from apps.cms.models import CMSUser,CMPermission
-from apps.models import BannersModel,BoardModel,PostModel,HighlightPostModel,TaskModel,WorkModel,HostModel
+from apps.models import BannersModel,BoardModel,PostModel,HighlightPostModel,TaskModel,WorkModel,HostModel,PortModel
 import config
 from apps.cms.decorators import LoginRequired,permission_required
-from exts import db,mail
+from exts import db,mail,mydocker
 from utils import zlmemcache
 from flask_mail import Message
 import string
@@ -252,6 +252,60 @@ def dtask():
     db.session.delete(task)
     db.session.commit()
     return jsonify({'code': '200', 'message': '镜像删除成功！'})
+
+
+#删除任务弹窗 的提交表单
+@cms_bp.route('/dwork/',methods = ['GET'])
+@LoginRequired
+def dwork():
+
+    workid = request.args.get('banner_id')
+
+    if not workid:
+        return jsonify({'code': '400', 'message': '任务id不存在！'})
+
+
+    work = WorkModel.query.get(workid)
+    if not work:
+        return jsonify({'code': '400', 'message': '任务不存在！'})
+
+
+
+    work.task_status = 2
+    tmpname = work.task_name
+    tmpport = work.hostport.split(':')[1]
+
+    tmpip = work.hostport.split(':')[0]
+
+
+    port = PortModel.query.filter_by(name=tmpport).first()
+    port.status = '5'
+    port.host_id = 0
+
+
+    host = HostModel.query.filter_by(ip=tmpip).first()
+    host.worknum = host.worknum -1
+    import redis
+
+    redisex = redis.Redis(host='127.0.0.1', port=6379, db=0)
+    # redisex.hdel(work.id, 'progress')
+    # redisex.hdel(work.id, 'domain')
+
+    # 获取赛题容器
+    tmpdocker = mydocker.containers.get(tmpname)
+    tmpdocker.remove(force=True)
+
+    confpath = "/home/wang/nginx/conf.d/%s.conf" % tmpname
+    if os.path.exists(confpath):
+        os.remove(confpath)
+
+    pro = mydocker.containers.get("proxy-ng")
+    pro.exec_run("nginx -s reload")
+
+    db.session.delete(work)
+    db.session.commit()
+
+    return jsonify({'code': '200', 'message': '任务删除成功！'})
 
 
 

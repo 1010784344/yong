@@ -160,7 +160,7 @@ var zlalert = {
             'type': type,
             'showCancelButton': false,
             'showConfirmButton': false,
-            'timer': 1000,
+            'timer': 5000,
         });
     },
     // 关闭当前对话框

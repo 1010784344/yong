@@ -45,6 +45,7 @@
             <td>主机ip</td>
             <td>状态</td>
             <td>任务数</td>
+            <td>同步的镜像</td>
             <td>创建日期</td>
             <td>操作</td>
         </tr>
@@ -57,8 +58,9 @@
 
                         <td>{{ banner.ip }}</td>
 
-                        <td>{{ banner.status }}</td>
+                        <td>{{ banner.status|host_status }}</td>
                         <td>{{ banner.worknum }}</td>
+                        <td>{{ banner.syn_mirror }}</td>
                         <td>{{ banner.create_time }}</td>
                         <td>
 {#                            <button class="btn btn-default btn-xs edit-banner-btn">编辑</button>#}

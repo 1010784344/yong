@@ -16,7 +16,7 @@ $(function () {
 
         var priorityInput = $("input[name='priority']");
 
-        var typeInput = $("input[name='stypeRadio']:checked");
+        var typeInput = $("input[name='type_radio']:checked");
 
         var name = nameInput.val();
 
@@ -46,7 +46,7 @@ $(function () {
         if (submitType == 'update') {
             url = '/cms/ubanner/';
         } else {
-            url = '/cms/atask/'
+            url = '/cms/add_task/'
         }
 
         var  fileObj = document.getElementById( "img_url" ).files[0];
@@ -56,7 +56,7 @@ $(function () {
         formData.append('link_url', link_url);
         formData.append('priority', priority);
         formData.append('img_url', fileObj);
-        formData.append('stypeRadio', contesttype);
+        formData.append('type_radio', contesttype);
 
 
 
@@ -133,7 +133,7 @@ $(function () {
             'msg': '确定要删除这条状态吗?',
             'confirmCallback': function () {
                 zlajax.post({
-                    'url': '/cms/dtask/',
+                    'url': '/cms/del_task/',
                     'data': {
                         'banner_id': banner_id
                     },

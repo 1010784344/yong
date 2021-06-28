@@ -40,7 +40,7 @@ $(function () {
         if (submitType == 'update') {
             url = '/cms/ubanner/';
         } else {
-            url = '/cms/ahost/'
+            url = '/cms/add_host/'
         }
         zlajax.post({
             'url': url,
@@ -106,7 +106,7 @@ $(function () {
             'msg': '确定要删除这条状态吗?',
             'confirmCallback': function () {
                 zlajax.post({
-                    'url': '/cms/dhost/',
+                    'url': '/cms/del_host/',
                     'data': {
                         'banner_id': banner_id
                     },

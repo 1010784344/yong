@@ -45,6 +45,7 @@
             <td>内容</td>
 
             <td>镜像</td>
+            <td>类型</td>
             <td>flag</td>
             <td>创建日期</td>
             <td>操作</td>
@@ -58,7 +59,7 @@
 
                         <td>{{ banner.text }}</td>
                         <td>{{ banner.image }}</td>
-
+                        <td>{{ banner.type }}</td>
                         <td>{{ banner.flag }}</td>
                         <td>{{ banner.creat_time }}</td>
                         <td>
@@ -117,8 +118,8 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">类型:</label>
                             <div class="col-sm-10">
-                                <input type="radio" id=static name=stypeRadio checked="true" value="1"/>静态
-                                <input type="radio"  id=dynamic name=stypeRadio value="2"/>动态
+                                <input type="radio" id=static name=type_radio checked="true" value="1"/>静态
+                                <input type="radio"  id=dynamic name=type_radio value="2"/>动态
 {#                                <input type="file" class="form-control" id="img_url" name="img_url" placeholder="任务镜像">#}
                             </div>
 {#                            <button class="col-sm-2 btn btn-info" id="upload-btn">添加镜像</button>#}

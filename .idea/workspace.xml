@@ -1,7 +1,212 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="28370162-a343-4628-aeb8-2761b3e99142" name="Default Changelist" comment="" />
+    <list default="true" id="28370162-a343-4628-aeb8-2761b3e99142" name="Default Changelist" comment="tmp fin">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/yong.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/13.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/cms/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/cms/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/cms/decorators.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/cms/decorators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/cms/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/cms/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/cms/hooks.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/cms/hooks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/cms/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/cms/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/cms/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/cms/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/common/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/common/forms.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/common/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/common/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/front/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/front/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/front/decorators.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/front/decorators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/front/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/front/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/front/hooks.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/front/hooks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/front/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/front/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/front/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/front/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/ueditor/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/ueditor/ueditor.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exts.py" beforeDir="false" afterPath="$PROJECT_DIR$/exts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/README" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/alembic.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/env.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/script.py.mako" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/versions/6177715393bc_.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/versions/b309eb3d3f06_.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/versions/d0eb842b7398_.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/versions/de86fdc76b44_.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/myContest.py" beforeDir="false" afterPath="$PROJECT_DIR$/myContest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/cms/js/hosts.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/cms/js/hosts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/cms/js/task.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/cms/js/task.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/cms/js/work.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/cms/js/work.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/common/sweetalert/zlalert.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/common/sweetalert/zlalert.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/front/js/front_tdetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/front/js/front_tdetail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/anchor/anchor.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/attachment/attachment.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/attachment/attachment.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/attachment/attachment.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/attachment/fileTypeImages/icon_chm.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/attachment/fileTypeImages/icon_doc.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/attachment/fileTypeImages/icon_exe.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/attachment/fileTypeImages/icon_jpg.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/attachment/fileTypeImages/icon_mp3.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/attachment/fileTypeImages/icon_mv.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/attachment/fileTypeImages/icon_pdf.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/attachment/fileTypeImages/icon_ppt.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/attachment/fileTypeImages/icon_psd.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/attachment/fileTypeImages/icon_rar.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/attachment/fileTypeImages/icon_txt.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/attachment/fileTypeImages/icon_xls.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/attachment/images/alignicon.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/attachment/images/file-icons.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/attachment/images/icons.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/attachment/images/success.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/background/background.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/background/background.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/background/background.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/charts/chart.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/charts/charts.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/charts/charts.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/charts/charts.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/emotion/emotion.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/emotion/emotion.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/emotion/emotion.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/emotion/images/0.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/emotion/images/bface.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/emotion/images/cface.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/emotion/images/fface.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/emotion/images/jxface2.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/emotion/images/tface.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/emotion/images/wface.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/emotion/images/yface.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/gmap/gmap.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/help/help.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/help/help.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/help/help.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/image/image.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/image/image.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/image/image.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/image/images/icons.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/image/images/success.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/insertframe/insertframe.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/internal.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/link/link.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/map/map.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/map/show.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/music/music.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/music/music.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/music/music.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/preview/preview.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/scrawl/scrawl.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/scrawl/scrawl.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/scrawl/scrawl.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/searchreplace/searchreplace.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/searchreplace/searchreplace.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/snapscreen/snapscreen.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/spechars/spechars.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/spechars/spechars.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/table/edittable.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/table/edittable.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/table/edittable.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/table/edittd.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/table/edittip.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/template/config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/template/images/bg.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/template/template.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/template/template.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/template/template.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/video/images/file-icons.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/video/images/icons.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/video/images/success.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/video/video.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/video/video.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/video/video.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/webapp/webapp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/wordimage/fClipboard_ueditor.swf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/wordimage/imageUploader.swf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/wordimage/tangram.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/wordimage/wordimage.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/dialogs/wordimage/wordimage.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/lang/en/en.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/lang/zh-cn/zh-cn.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/php/Uploader.class.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/php/action_crawler.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/php/action_list.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/php/action_upload.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/php/config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/php/controller.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/themes/default/css/ueditor.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/themes/default/css/ueditor.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/themes/default/dialogbase.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/themes/default/images/anchor.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/themes/default/images/button-bg.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/themes/default/images/cancelbutton.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/themes/default/images/cursor_h.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/themes/default/images/cursor_v.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/themes/default/images/highlighted.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/themes/default/images/icons-all.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/themes/default/images/icons.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/themes/default/images/loading.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/themes/default/images/lock.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/themes/default/images/pagebreak.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/themes/default/images/spacer.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/themes/default/images/unhighlighted.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/themes/default/images/videologo.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/themes/default/images/word.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/themes/iframe.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/ueditor.all.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/ueditor/ueditor.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/tasks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/cms/cms_banners.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/cms/cms_boards.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/cms/cms_comments.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/cms/cms_croles.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/cms/cms_cusers.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/cms/cms_hosts.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cms/cms_hosts.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/cms/cms_posts.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/cms/cms_resetemail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/cms/cms_resetpwd.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/cms/cms_tasks.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cms/cms_tasks.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/front/front_apost.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/front/front_base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/front_base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/front/front_index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/front_index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/front/front_pdetail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/test.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/alidayu.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/captcha/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/captcha/consola.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/captcha/consolab.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/captcha/consolai.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/safeutils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/tmp.conf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/zlmemcache.py" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -9,6 +214,16 @@
   </component>
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1rpJfYNsintxJVeEBD9TR78eDXE" />
   <component name="ProjectViewState">
@@ -18,17 +233,23 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../tmp/dndjango/dn_django/django_code01" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
-  <component name="RunManager" selected="Flask server.Flask (zlbbs.py)">
+  <component name="RunManager" selected="Python.yong">
     <configuration name="13" type="PythonConfigurationType" factoryName="Python">
       <module name="13" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -51,20 +272,20 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="models" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="13" />
+    <configuration name="exts" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="yong" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/apps" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/apps/models.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/exts.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -95,26 +316,109 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Flask (zlbbs.py)" type="Python.FlaskServer" temporary="true" nameIsGenerated="true">
-      <module name="13" />
-      <option name="target" value="$PROJECT_DIR$/zlbbs.py" />
-      <option name="targetType" value="PATH" />
+    <configuration name="socketserver" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="yong" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
+      <option name="WORKING_DIRECTORY" value="$USER_HOME$/AppData/Local/JetBrains/PyCharm2020.1/remote_sources/1834759711/201545293" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="launchJavascriptDebuger" value="false" />
+      <option name="SCRIPT_NAME" value="$USER_HOME$/AppData/Local/JetBrains/PyCharm2020.1/remote_sources/1834759711/201545293/socketserver.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="yong" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="views" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="yong" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/apps/front" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/apps/front/views.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="yong" type="PythonConfigurationType" factoryName="Python">
+      <module name="yong" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="sftp://wang@192.168.141.177:22/usr/bin/python3" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/myContest.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.yong" />
+      <item itemvalue="Python.13" />
+      <item itemvalue="Python.runserver" />
+      <item itemvalue="Python.views" />
+      <item itemvalue="Python.exts" />
+      <item itemvalue="Python.socketserver" />
+      <item itemvalue="Python.test" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Flask server.Flask (zlbbs.py)" />
-        <item itemvalue="Python.runserver" />
-        <item itemvalue="Python.models" />
+        <item itemvalue="Python.test" />
+        <item itemvalue="Python.socketserver" />
+        <item itemvalue="Python.exts" />
+        <item itemvalue="Python.views" />
       </list>
     </recent_temporary>
   </component>
@@ -131,106 +435,365 @@
       <workItem from="1619667202575" duration="3690000" />
       <workItem from="1619676618087" duration="13111000" />
       <workItem from="1619695462120" duration="3947000" />
+      <workItem from="1621477885637" duration="17823000" />
+      <workItem from="1621563119407" duration="7465000" />
+      <workItem from="1621829203953" duration="10311000" />
+      <workItem from="1621910896987" duration="5832000" />
+      <workItem from="1622000762186" duration="365000" />
+      <workItem from="1622001148966" duration="68183000" />
+      <workItem from="1622427975723" duration="87196000" />
+      <workItem from="1622778823321" duration="131264000" />
+      <workItem from="1623834053013" duration="134070000" />
+      <workItem from="1624847329025" duration="15478000" />
     </task>
+    <task id="LOCAL-00001" summary="优化">
+      <created>1621563891856</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1621563891857</updated>
+    </task>
+    <task id="LOCAL-00002" summary="host manage">
+      <created>1622793783508</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1622793783508</updated>
+    </task>
+    <task id="LOCAL-00003" summary="tmp fin">
+      <created>1623391936058</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1623391936112</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="优化" />
+    <MESSAGE value="host manage" />
+    <MESSAGE value="tmp fin" />
+    <option name="LAST_COMMIT_MESSAGE" value="tmp fin" />
+  </component>
   <component name="WindowStateProjectService">
-    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1619676614019">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="324" y="91" key="#Deployment" timestamp="1621829323046">
+      <screen x="0" y="0" width="1462" height="864" />
     </state>
+    <state x="324" y="91" key="#Deployment/0.0.1462.864@0.0.1462.864" timestamp="1621829323046" />
+    <state x="428" y="19" key="#Flask_(myContest.py)" timestamp="1621504360304">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state x="428" y="19" key="#Flask_(myContest.py)/0.0.1462.864@0.0.1462.864" timestamp="1621504360304" />
+    <state x="428" y="19" key="#Flask_(myContest.py)_(1)" timestamp="1621504392889">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state x="428" y="19" key="#Flask_(myContest.py)_(1)/0.0.1462.864@0.0.1462.864" timestamp="1621504392889" />
+    <state x="377" y="121" key="#Options" timestamp="1621507084330">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state x="377" y="121" key="#Options/0.0.1462.864@0.0.1462.864" timestamp="1621507084330" />
+    <state x="82" y="61" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1623130322719">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state x="82" y="61" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1462.864@0.0.1462.864" timestamp="1623130322719" />
+    <state x="466" y="233" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1623395175585">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state x="466" y="233" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1462.864@0.0.1462.864" timestamp="1623395175585" />
+    <state x="462" y="179" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1623395561067">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state x="462" y="179" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1462.864@0.0.1462.864" timestamp="1623395561067" />
+    <state x="485" y="152" key="EnvironmentVariablesDialog" timestamp="1621504472911">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state x="485" y="152" key="EnvironmentVariablesDialog/0.0.1462.864@0.0.1462.864" timestamp="1621504472911" />
+    <state x="523" y="175" key="FileChooserDialogImpl" timestamp="1624500689293">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state x="523" y="175" key="FileChooserDialogImpl/0.0.1462.864@0.0.1462.864" timestamp="1624500689293" />
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1619676614019" />
-    <state width="1493" height="271" key="GridCell.Tab.0.bottom" timestamp="1619778731758">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1419" height="197" key="GridCell.Tab.0.bottom" timestamp="1624871031100">
+      <screen x="0" y="0" width="1462" height="864" />
     </state>
+    <state width="1419" height="197" key="GridCell.Tab.0.bottom/0.0.1462.864@0.0.1462.864" timestamp="1624871031100" />
     <state width="1493" height="271" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1619778731758" />
-    <state width="1493" height="271" key="GridCell.Tab.0.center" timestamp="1619778731757">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1419" height="197" key="GridCell.Tab.0.center" timestamp="1624871031100">
+      <screen x="0" y="0" width="1462" height="864" />
     </state>
+    <state width="1419" height="197" key="GridCell.Tab.0.center/0.0.1462.864@0.0.1462.864" timestamp="1624871031100" />
     <state width="1493" height="271" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1619778731757" />
-    <state width="1493" height="271" key="GridCell.Tab.0.left" timestamp="1619778731757">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1419" height="197" key="GridCell.Tab.0.left" timestamp="1624871031100">
+      <screen x="0" y="0" width="1462" height="864" />
     </state>
+    <state width="1419" height="197" key="GridCell.Tab.0.left/0.0.1462.864@0.0.1462.864" timestamp="1624871031100" />
     <state width="1493" height="271" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1619778731757" />
-    <state width="1493" height="271" key="GridCell.Tab.0.right" timestamp="1619778731757">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1419" height="197" key="GridCell.Tab.0.right" timestamp="1624871031100">
+      <screen x="0" y="0" width="1462" height="864" />
     </state>
+    <state width="1419" height="197" key="GridCell.Tab.0.right/0.0.1462.864@0.0.1462.864" timestamp="1624871031100" />
     <state width="1493" height="271" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1619778731757" />
-    <state width="1493" height="151" key="GridCell.Tab.1.bottom" timestamp="1619777640174">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1419" height="197" key="GridCell.Tab.1.bottom" timestamp="1624871031101">
+      <screen x="0" y="0" width="1462" height="864" />
     </state>
+    <state width="1419" height="197" key="GridCell.Tab.1.bottom/0.0.1462.864@0.0.1462.864" timestamp="1624871031101" />
     <state width="1493" height="151" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1619777640174" />
-    <state width="1493" height="151" key="GridCell.Tab.1.center" timestamp="1619777640174">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1419" height="197" key="GridCell.Tab.1.center" timestamp="1624871031100">
+      <screen x="0" y="0" width="1462" height="864" />
     </state>
+    <state width="1419" height="197" key="GridCell.Tab.1.center/0.0.1462.864@0.0.1462.864" timestamp="1624871031100" />
     <state width="1493" height="151" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1619777640174" />
-    <state width="1493" height="151" key="GridCell.Tab.1.left" timestamp="1619777640174">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1419" height="197" key="GridCell.Tab.1.left" timestamp="1624871031100">
+      <screen x="0" y="0" width="1462" height="864" />
     </state>
+    <state width="1419" height="197" key="GridCell.Tab.1.left/0.0.1462.864@0.0.1462.864" timestamp="1624871031100" />
     <state width="1493" height="151" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1619777640174" />
-    <state width="1493" height="151" key="GridCell.Tab.1.right" timestamp="1619777640174">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1419" height="197" key="GridCell.Tab.1.right" timestamp="1624871031100">
+      <screen x="0" y="0" width="1462" height="864" />
     </state>
+    <state width="1419" height="197" key="GridCell.Tab.1.right/0.0.1462.864@0.0.1462.864" timestamp="1624871031100" />
     <state width="1493" height="151" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1619777640174" />
-    <state x="270" y="57" key="SettingsEditor" timestamp="1619679693979">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="257" y="60" key="SettingsEditor" timestamp="1624871129924">
+      <screen x="0" y="0" width="1462" height="864" />
     </state>
+    <state x="257" y="60" key="SettingsEditor/0.0.1462.864@0.0.1462.864" timestamp="1624871129924" />
     <state x="270" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1619679693979" />
-    <state width="775" height="419" key="XDebugger.FullValuePopup" timestamp="1619689326995">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="324" y="152" key="Vcs.Push.Dialog.v2" timestamp="1623391942095">
+      <screen x="0" y="0" width="1462" height="864" />
     </state>
+    <state x="324" y="152" key="Vcs.Push.Dialog.v2/0.0.1462.864@0.0.1462.864" timestamp="1623391942095" />
+    <state width="738" height="440" key="XDebugger.FullValuePopup" timestamp="1624865837773">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state width="738" height="440" key="XDebugger.FullValuePopup/0.0.1462.864@0.0.1462.864" timestamp="1624865837773" />
     <state width="775" height="419" key="XDebugger.FullValuePopup/0.0.1536.824@0.0.1536.824" timestamp="1619689326995" />
-    <state x="468" y="13" width="600" height="798" key="find.popup" timestamp="1619758593415">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="0" y="4" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1624517371280">
+      <screen x="0" y="0" width="1462" height="864" />
     </state>
+    <state x="0" y="4" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1462.864@0.0.1462.864" timestamp="1624517371280" />
+    <state x="548" y="300" key="com.jetbrains.plugins.remotesdk.ui.RemoteMappingsConfiguration" timestamp="1621829276868">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state x="548" y="300" key="com.jetbrains.plugins.remotesdk.ui.RemoteMappingsConfiguration/0.0.1462.864@0.0.1462.864" timestamp="1621829276868" />
+    <state x="313" y="33" width="723" height="1047" key="find.popup" timestamp="1624870246425">
+      <screen x="0" y="0" width="1846" height="1080" />
+    </state>
+    <state x="248" y="27" width="572" height="837" key="find.popup/0.0.1462.864@0.0.1462.864" timestamp="1624863098507" />
     <state x="468" y="13" width="600" height="798" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1619758593415" />
+    <state x="313" y="33" width="723" height="1047" key="find.popup/0.0.1846.1080@0.0.1846.1080" timestamp="1624870246425" />
+    <state x="610" y="163" key="ftp.server.browser" timestamp="1621477963416">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state x="610" y="163" key="ftp.server.browser/0.0.1462.864@0.0.1462.864" timestamp="1621477963416" />
+    <state x="394" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1623151360349">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state x="394" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1462.864@0.0.1462.864" timestamp="1623151360349" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/apps/front/views.py</url>
-          <line>204</line>
+          <line>84</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/apps/front/models.py</url>
-          <line>34</line>
+          <line>35</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/apps/front/views.py</url>
-          <line>242</line>
-          <option name="timeStamp" value="5" />
+          <url>file://$PROJECT_DIR$/apps/cms/views.py</url>
+          <line>134</line>
+          <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/apps/front/views.py</url>
-          <line>232</line>
-          <option name="timeStamp" value="6" />
+          <line>133</line>
+          <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/apps/front/views.py</url>
-          <line>229</line>
-          <option name="timeStamp" value="7" />
+          <line>115</line>
+          <option name="timeStamp" value="27" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/apps/front/forms.py</url>
-          <line>1</line>
-          <option name="timeStamp" value="8" />
+          <url>file://$PROJECT_DIR$/apps/cms/views.py</url>
+          <line>66</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/apps/cms/views.py</url>
+          <line>95</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/apps/cms/views.py</url>
+          <line>172</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/apps/front/views.py</url>
+          <line>96</line>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/apps/front/views.py</url>
+          <line>143</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/apps/cms/views.py</url>
+          <line>147</line>
+          <option name="timeStamp" value="35" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/tasks.py</url>
+          <line>113</line>
+          <option name="timeStamp" value="36" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/apps/front/views.py</url>
+          <line>113</line>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/apps/front/views.py</url>
+          <line>118</line>
+          <option name="timeStamp" value="44" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/apps/front/views.py</url>
+          <line>128</line>
+          <option name="timeStamp" value="49" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/apps/cms/views.py</url>
+          <line>199</line>
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/apps/front/views.py</url>
+          <line>162</line>
+          <option name="timeStamp" value="52" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/apps/front/views.py</url>
+          <line>205</line>
+          <option name="timeStamp" value="54" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/utils/checkip.py</url>
+          <line>16</line>
+          <option name="timeStamp" value="65" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/apps/front/views.py</url>
+          <line>139</line>
+          <option name="timeStamp" value="66" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/apps/cms/views.py</url>
+          <line>47</line>
+          <option name="timeStamp" value="67" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/test.py</url>
+          <line>8</line>
+          <option name="timeStamp" value="69" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/test.py</url>
+          <line>13</line>
+          <option name="timeStamp" value="70" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/test.py</url>
+          <line>19</line>
+          <option name="timeStamp" value="71" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/apps/front/views.py</url>
+          <line>258</line>
+          <option name="timeStamp" value="72" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/apps/front/views.py</url>
+          <line>291</line>
+          <option name="timeStamp" value="73" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/apps/front/views.py</url>
+          <line>271</line>
+          <option name="timeStamp" value="74" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/apps/front/views.py</url>
+          <line>303</line>
+          <option name="timeStamp" value="75" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="jinja2-line">
+          <url>file://$PROJECT_DIR$/templates/front/front_index.html</url>
+          <line>144</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/static/front/js/front_tdetail.js</url>
+          <line>164</line>
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/static/front/js/front_tdetail.js</url>
+          <line>167</line>
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/static/front/js/front_tdetail.js</url>
+          <line>166</line>
+          <option name="timeStamp" value="47" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/static/front/js/front_tdetail.js</url>
+          <line>132</line>
+          <option name="timeStamp" value="48" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Python.FlaskServer">
         <watch expression="request" language="Python" />
+        <watch expression="task.name+os.sep+task.image" language="Python" />
       </configuration>
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/yong$yong.coverage" NAME="yong Coverage Results" MODIFIED="1624866207723" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/yong$exts.coverage" NAME="exts Coverage Results" MODIFIED="1622785776732" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/yong$Flask__myContest_py___1_.coverage" NAME="Flask (myContest.py) (1) Coverage Results" MODIFIED="1623130286926" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/13$runserver.coverage" NAME="runserver Coverage Results" MODIFIED="1619675732299" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/13$models.coverage" NAME="models Coverage Results" MODIFIED="1619668668956" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/apps" />
     <SUITE FILE_PATH="coverage/13$Flask__zlbbs_py_.coverage" NAME="Flask (zlbbs.py) Coverage Results" MODIFIED="1619778731746" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/yong$views.coverage" NAME="views Coverage Results" MODIFIED="1622013168462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/apps/front" />
+    <SUITE FILE_PATH="coverage/yong$Flask.coverage" NAME="Flask Coverage Results" MODIFIED="1622428461865" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/yong$test.coverage" NAME="test Coverage Results" MODIFIED="1624594020809" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/yong$socketserver.coverage" NAME="socketserver Coverage Results" MODIFIED="1623132651913" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/AppData/Local/JetBrains/PyCharm2020.1/remote_sources/1834759711/201545293" />
+    <SUITE FILE_PATH="coverage/yong$Flask__myContest_py_.coverage" NAME="Flask (myContest.py) Coverage Results" MODIFIED="1621564305188" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>

@@ -1,3 +1,11 @@
+function sleep(time) {
+    var startTime = new Date().getTime() + parseInt(time, 10);
+    while(new Date().getTime() < startTime) {}
+};
+
+
+
+
 //倒计时异步函数
 function startTimer() {
         var displays = $('#mytime');
@@ -342,17 +350,17 @@ function subflag(){
                         if (data['code'] == 200) {
 
                             if (data['message'] == '回答错误！'){
-                                zlalert.alertSuccessToast(data['message']);
-                                setTimeout(function(){
-                                // window.location.reload();
-                            },500);
+                                zlalert.alertErrorToast(data['message']);
+                                sleep(1000)
+                                window.location.reload();
+
 
                             } else if (data['message'] == '回答正确！'){
 
                                 zlalert.alertSuccessToast(data['message']);
-                            setTimeout(function(){
+                                sleep(1000)
                                 window.location.reload();
-                            },500);
+
                             }
 
 

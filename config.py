@@ -1,6 +1,9 @@
- # -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
+
 
 import os
+
+
 DEBUG = True
 SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:123456@127.0.0.1/zlbbs?charset=utf8'
 # SQLALCHEMY 里面的模型一有变动，那么他都会给我们发送一个信号，没有必要会浪费性能
@@ -13,50 +16,26 @@ SECRET_KEY = 'man man lai'
 CMS_USER_ID = 'cms_user_id'
 FRONT_USER_ID = 'front_user_id'
 
-# 邮箱配置信息
-MAIL_SERVER = "SMTP.qq.com"
-MAIL_PORT = "587"
-MAIL_USE_TLS = True
-MAIL_USERNAME = "1010784344@qq.com"
-# 并不是上面邮箱用户的密码
-MAIL_PASSWORD = "blotkweqnlwpbccj"
-MAIL_DEFAULT_SENDER = "1010784344@qq.com"
-
-
-
-
-# 短信验证配置信息
-ALIDAYU_APP_KEY = ''
-ALIDAYU_APP_SECRET = ' '
-ALIDAYU_SIGN_NAME = '仙剑论坛网站'
-ALIDAYU_TEMPLATE_CODE = 'SMS_184820719'
-
-
-
 # flask_paginate 的相关配置(分页，一页多少个)
 PER_PAGE = 10
-
 
 # celery 的相关配置
 CELERY_RESULT_BACKEND = 'redis://@127.0.0.1:6379/1'
 CELERY_BROKER_URL = 'redis://@127.0.0.1:6379/1'
 
-
-#路径配置相关信息
+# 路径配置相关信息
 APPS_DIR = os.path.dirname(__file__)
-UPLOADED_dir = os.path.join(APPS_DIR,'contests')
-CONF_info = """server {
+UPLOADED_DIR = os.path.join(APPS_DIR, 'contests')
+CONF_INFO = """server {
+
     listen       80;
     server_name %s.testnginx.com;
-
     location / {
-        proxy_pass   http://192.168.141.177:%s;
+        proxy_pass   http://%s:%s;
     }
-
 }"""
 
 
-progress_mydata = {}
 
 
 

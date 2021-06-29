@@ -123,6 +123,29 @@ def create_contest(tmp_uuid, work_id, task_name, task_image, port_name, task_fla
     print("赛题创建成功")
 
 
+# 定义一个删除赛题的任务
+@celery.task
+def del_contest(tmp_ip, tmp_name):
+    # 获取赛题容器
+    try:
+        import docker
+        del_docker = docker.DockerClient(base_url='tcp://%s:2375' % tmp_ip)
+
+        tmp_docker = del_docker.containers.get(tmp_name)
+        tmp_docker.remove(force=True)
+
+        conf_path = "/home/wang/nginx/conf.d/%s.conf" % tmp_name
+        if os.path.exists(conf_path):
+            os.remove(conf_path)
+    except Exception as e:
+        pass
+
+    pro = main_docker.containers.get("proxy-ng")
+    pro.exec_run("nginx -s reload")
+
+    # tmp_info = '任务 %s 删除成功！' % tmp_name
+    # current_app.logger.info(tmp_info)
+
 if __name__ == '__main__':
     pass
 

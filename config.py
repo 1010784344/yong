@@ -17,7 +17,7 @@ CMS_USER_ID = 'cms_user_id'
 FRONT_USER_ID = 'front_user_id'
 
 # flask_paginate 的相关配置(分页，一页多少个)
-PER_PAGE = 10
+PER_PAGE = 4
 
 # celery 的相关配置
 CELERY_RESULT_BACKEND = 'redis://@127.0.0.1:6379/1'

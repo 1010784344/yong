@@ -18,7 +18,7 @@ import config
 from tasks import create_contest
 
 
-redisex = redis.Redis(host='127.0.0.1', port=6379, db=0)
+redis_ex = redis.Redis(host='127.0.0.1', port=6379, db=0)
 
 front_bp = Blueprint('front', __name__)
 
@@ -210,8 +210,8 @@ def aanswer():
         work = WorkModel.query.filter_by(task_name=work_name).first()
         real_flag = work.task_flag
         if not real_flag:
-            quietid = work.task_id
-            task = TaskModel.query.filter_by(id=quietid).first()
+            quiet_id = work.task_id
+            task = TaskModel.query.filter_by(id=quiet_id).first()
             real_flag = task.flag
         if flag_info != real_flag:
 
@@ -233,11 +233,11 @@ def show_progress(uuid):
     """前端请求进度的函数"""
 
     try:
-        tmp_data = redisex.hget(uuid, 'progress')
+        tmp_data = redis_ex.hget(uuid, 'progress')
         if not tmp_data:
             tmp_data = 0
-        domain = redisex.hget(uuid, 'domain')
-        work_name = redisex.hget(uuid, 'workname')
+        domain = redis_ex.hget(uuid, 'domain')
+        work_name = redis_ex.hget(uuid, 'workname')
     except Exception as e:
         tmp_data = 0
         domain = 'hello'

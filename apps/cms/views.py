@@ -12,6 +12,7 @@ import config
 from apps.cms.decorators import login_required
 from exts import db, main_docker
 from utils import checkip
+from tasks import del_contest
 
 
 # 定义 cms 的蓝图
@@ -217,27 +218,32 @@ def del_work():
     port.host_id = 0
 
     host = HostModel.query.filter_by(ip=tmp_ip).first()
-    host.work_num = host.worknum - 1
+    if host.worknum <= 0:
+        host.worknum = 0
+    else:
+        host.worknum = host.worknum - 1
 
-    # 获取赛题容器
-    try:
-        import docker
-        del_docker = docker.DockerClient(base_url='tcp://%s:2375' % tmp_ip)
+    del_contest.delay(tmp_ip, tmp_name)
 
-        tmp_docker = del_docker.containers.get(tmp_name)
-        tmp_docker.remove(force=True)
-
-        conf_path = "/home/wang/nginx/conf.d/%s.conf" % tmp_name
-        if os.path.exists(conf_path):
-            os.remove(conf_path)
-    except Exception as e:
-        pass
-
-    pro = main_docker.containers.get("proxy-ng")
-    pro.exec_run("nginx -s reload")
-
-    tmp_info = '任务 %s 删除成功！' % tmp_name
-    current_app.logger.info(tmp_info)
+    # # 获取赛题容器
+    # try:
+    #     import docker
+    #     del_docker = docker.DockerClient(base_url='tcp://%s:2375' % tmp_ip)
+    #
+    #     tmp_docker = del_docker.containers.get(tmp_name)
+    #     tmp_docker.remove(force=True)
+    #
+    #     conf_path = "/home/wang/nginx/conf.d/%s.conf" % tmp_name
+    #     if os.path.exists(conf_path):
+    #         os.remove(conf_path)
+    # except Exception as e:
+    #     pass
+    #
+    # pro = main_docker.containers.get("proxy-ng")
+    # pro.exec_run("nginx -s reload")
+    #
+    # tmp_info = '任务 %s 删除成功！' % tmp_name
+    # current_app.logger.info(tmp_info)
 
     db.session.delete(work)
     db.session.commit()

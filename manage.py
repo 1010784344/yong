@@ -15,8 +15,6 @@ CMSUser = cms_model.CMSUser
 CMSRole = cms_model.CMSRole
 CMPermission = cms_model.CMPermission
 
-PostModel = apps_model.PostModel
-BoardModel = apps_model.BoardModel
 PortModel = apps_model.PortModel
 
 FrontUser = front_model.FrontUser

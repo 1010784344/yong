@@ -8,13 +8,12 @@ from celery import Celery
 from flask import Flask
 
 import config
-from exts import mail, main_docker
+from exts import main_docker
 
 
 # 初始化 一个新的app 对象
 app = Flask(__name__)
 app.config.from_object(config)
-mail.init_app(app)
 
 
 def make_celery(app):

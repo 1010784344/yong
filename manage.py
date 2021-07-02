@@ -102,5 +102,20 @@ def create_front_user(telephone, password, username):
     print('前台用户添加成功！')
 
 
+# python manage.py create_test_port
+# 命令行批量创建端口号
+@manager.command
+def create_test_port():
+
+    for i in range(1001,1500):
+        # 5 表示未被占用
+
+        port = PortModel(name=str(i), status=str(5))
+
+        db.session.add(port)
+        db.session.commit()
+    print('恭喜！测试端口添加成功！')
+
+
 if __name__ == '__main__':
     manager.run()

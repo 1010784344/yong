@@ -7,7 +7,7 @@ import shortuuid
 from exts import db
 
 
-# 添加 任务管理 的数据模型
+# 添加 镜像管理 的数据模型
 class TaskModel(db.Model):
 
     __tablename__ = 'task'
@@ -23,10 +23,10 @@ class TaskModel(db.Model):
     flag = db.Column(db.String(255), nullable=False)
     creat_time = db.Column(db.DateTime, default=datetime.now)
 
-    works = db.relationship('WorkModel', backref='tasks')
+    # works = db.relationship('WorkModel', backref='tasks')
 
 
-# 添加 work 的数据模型
+# 添加 任务管理 的数据模型
 class WorkModel(db.Model):
 
     __tablename__ = 'work'
@@ -36,13 +36,13 @@ class WorkModel(db.Model):
     task_time = db.Column(db.DateTime, default=datetime.now)
     task_score = db.Column(db.Integer, default=0)
     task_flag = db.Column(db.String(255), nullable=False)
-    hostport = db.Column(db.String(255), nullable=True)
+    host_port = db.Column(db.String(255), nullable=True)
     task_name = db.Column(db.String(255), nullable=True)
-
+    task_ori = db.Column(db.String(255), nullable=True)
     # 一个work只能属于一个赛题，一个work只能有一个人
-    task_id = db.Column(db.String(100), db.ForeignKey('task.id'))
+    # task_id = db.Column(db.String(100), db.ForeignKey('task.id'))
     author_id = db.Column(db.String(100), db.ForeignKey('front_user.id'), nullable=False)
-    # host_id = db.Column(db.Integer,db.ForeignKey('host.id'))
+    host_id = db.Column(db.Integer, db.ForeignKey('host.id'))
 
 
 class PortModel(db.Model):
@@ -67,7 +67,7 @@ class HostModel(db.Model):
     worknum = db.Column(db.Integer, default=0)
     syn_mirror = db.Column(db.String(255), nullable=True)
     # 一个主机有多个work
-    # works = db.relationship('WorkModel', backref='hosts')
+    works = db.relationship('WorkModel', backref='hosts')
     # 一个host 可以使用多个端口
     # ports = db.relationship('PortModel', backref='rhost')
 

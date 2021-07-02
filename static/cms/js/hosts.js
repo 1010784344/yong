@@ -1,4 +1,4 @@
-//添加轮播图之新增数据弹窗
+//添加主机之新增数据弹窗
 // (点击保存之后执行的js代码，不仅是新增数据之后进行保存操作，编辑完数据之后也需要进行保存操作)
 
 $(function () {
@@ -12,7 +12,6 @@ $(function () {
 
         var ipInput = $("input[name='link_url']");
 
-        var statusInput = $("input[name='priority']");
 
         // var priorityInput = $("input[name='priority']");
 
@@ -21,7 +20,6 @@ $(function () {
         console.log(name)
         var ip = ipInput.val();
         console.log(ip)
-        var status = statusInput.val();
         console.log(status)
         // var priority = priorityInput.val();
         // console.log(priority)
@@ -29,7 +27,7 @@ $(function () {
         var bannerId = self.attr('data-id');
         console.log("22222")
 
-        if (!name || !ip || !status) {
+        if (!name || !ip ) {
             zlalert.alertInfo('请输入所有数据');
             return;
         }
@@ -47,7 +45,6 @@ $(function () {
             'data': {
                 'name': name,
                 'ip': ip,
-                'status': status,
                 'banner_id': bannerId
             },
             'success': function (data) {

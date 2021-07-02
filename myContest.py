@@ -36,11 +36,5 @@ app.register_blueprint(cms_bp)
 app.register_blueprint(front_bp)
 
 
-@app.template_filter('host_status')
-def host_status(value):
-    value = '离线' if value == '0' else '在线'
-    return value
-
-
 if __name__ == '__main__':
     app.run(host='0.0.0.0')

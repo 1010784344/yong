@@ -1,6 +1,7 @@
 
 
 import os
+import re
 
 
 def ping_all(ip):
@@ -20,5 +21,12 @@ def add_ip(ip):
     return True
 
 
+def test_ip(ip):
+    pattern = re.compile(r'((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})(\.((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})){3}')
+    result = pattern.match(ip)
+    return result
+
+
 if __name__ == '__main__':
-    ping_all('192.168.141.188')
+    # ping_all('192.168.141.188')
+    test_ip('192.168jjjj.141.188')

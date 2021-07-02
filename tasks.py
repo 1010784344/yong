@@ -2,13 +2,12 @@
 
 
 import os
-import redis
 import docker
 from celery import Celery
 from flask import Flask
 
 import config
-from exts import main_docker
+from exts import main_docker, redis_ex
 
 
 # 初始化 一个新的app 对象
@@ -51,7 +50,7 @@ def image_up(img_url, name, file_name):
 # 定义一个创建赛题的任务
 @celery.task
 def create_contest(tmp_uuid, work_id, task_name, task_image, port_name, task_flag, hos_tip):
-    redis_ex = redis.Redis(host='127.0.0.1', port=6379, db=0)
+
     redis_ex.hset(work_id, 'progress', 0)
 
     # tar包 转移到对应的机器
@@ -101,7 +100,8 @@ def create_contest(tmp_uuid, work_id, task_name, task_image, port_name, task_fla
 
     # 配置代理配置文件
     conf_info = config.CONF_INFO % (tmp_uuid, hos_tip, port_name)
-    f = open("/home/wang/nginx/conf.d/%s.conf" % tmp_uuid, "w")
+    f = open("/root/nginx/conf.d/%s.conf" % tmp_uuid, "w")
+    # f = open("/home/wang/nginx/conf.d/%s.conf" % tmp_uuid, "w")
     f.write(conf_info)
     f.close()
 
@@ -127,7 +127,7 @@ def create_contest(tmp_uuid, work_id, task_name, task_image, port_name, task_fla
 def del_contest(tmp_ip, tmp_name):
     # 获取赛题容器
     try:
-        import docker
+
         del_docker = docker.DockerClient(base_url='tcp://%s:2375' % tmp_ip)
 
         tmp_docker = del_docker.containers.get(tmp_name)
@@ -141,9 +141,31 @@ def del_contest(tmp_ip, tmp_name):
 
     pro = main_docker.containers.get("proxy-ng")
     pro.exec_run("nginx -s reload")
-
+    print("任务删除成功！")
     # tmp_info = '任务 %s 删除成功！' % tmp_name
     # current_app.logger.info(tmp_info)
+
+
+# 删除主机的所有资源
+@celery.task
+def del_all_source(tmp_ip):
+    try:
+
+        del_docker = docker.DockerClient(base_url='tcp://%s:2375' % tmp_ip)
+
+        docker_list = del_docker.containers.list()
+        for tmp_docker in docker_list:
+            tmp_name = tmp_docker.name
+            tmp_docker.remove(force=True)
+
+            conf_path = "/root/nginx/conf.d/%s.conf" % tmp_name
+            if os.path.exists(conf_path):
+                os.remove(conf_path)
+    except Exception as e:
+        pass
+
+    print("资源删除成功！")
+
 
 if __name__ == '__main__':
     pass

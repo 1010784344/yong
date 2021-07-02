@@ -4,7 +4,6 @@ import os
 import urllib.parse as urlparse
 
 import shortuuid
-import redis
 import random
 from flask import Blueprint, views, render_template, request, jsonify, session, url_for, g, abort, redirect, current_app
 from flask_paginate import Pagination, get_page_parameter
@@ -13,12 +12,10 @@ from apps.front.forms import SignupForm, SignInForm
 from apps.models import BannersModel, TaskModel, WorkModel, PortModel, HostModel
 from apps.front.models import FrontUser
 from apps.front.decorators import login_required
-from exts import db, main_docker
+from exts import db, main_docker, redis_ex
 import config
 from tasks import create_contest
 
-
-redis_ex = redis.Redis(host='127.0.0.1', port=6379, db=0)
 
 front_bp = Blueprint('front', __name__)
 
@@ -29,46 +26,63 @@ def test():
     return render_template('test.html')
 
 
-@front_bp.route('/')
-def index():
+# @front_bp.route('/')
+# def index():
+#     # 展示
+#     banners = BannersModel.query.order_by(BannersModel.priority.desc()).limit(4)
+#
+#     # 排序信息(当没有st赋值，默认为 1 ，也就是当为首页时，st=1)
+#     # st = request.args.get('st', type=int, default=1)
+#
+#     # 分页前
+#     # posts = PostModel.query.all()
+#
+#     # 分页后
+#     # 从 url 的查询参数获取当前是第几页(指定当前是第几页)
+#     page = request.args.get(get_page_parameter(), type=int, default=1)
+#
+#     start = (page-1)*config.PER_PAGE
+#     end = start + config.PER_PAGE
+#
+#     total = 0
+#     query_obj = None
+#
+#     # 最新排序
+#     # if st == 1:
+#     query_obj = TaskModel.query.order_by(TaskModel.creat_time.desc())
+#
+#     posts = query_obj.slice(start, end)
+#     total = query_obj.count()
+#
+#     # pagination 用于前台页面的上一页和下一页的控制
+#     pagination = Pagination(bs_version=3, page=page, total=total)
+#
+#     # 返回多个参数到 html 页面
+#     context = {'banners': banners,
+#                'posts': posts,
+#                'pagination': pagination,
+#                # 方便前端点击那个板块，那个板块就选中的参数
+#                }
+#
+#     return render_template('front/front_index.html', **context)
+
+@front_bp.route('/', methods=['GET'])
+@front_bp.route('/<int:page>', methods=['GET'])
+def index(page=None):
     # 展示
     banners = BannersModel.query.order_by(BannersModel.priority.desc()).limit(4)
 
-    # 排序信息(当没有st赋值，默认为 1 ，也就是当为首页时，st=1)
-    st = request.args.get('st', type=int, default=1)
+    if not page:
+        page = 1
 
-    # 分页前
-    # posts = PostModel.query.all()
+    tasks = TaskModel.query.order_by(TaskModel.creat_time.desc()).paginate(page=page, per_page=5)
 
-    # 分页后
-    # 从 url 的查询参数获取当前是第几页(指定当前是第几页)
-    page = request.args.get(get_page_parameter(), type=int, default=1)
-
-    start = (page-1)*config.PER_PAGE
-    end = start + config.PER_PAGE
-
-    # 选中的
-    bd = request.args.get('bd', type=int, default=None)
-    total = 0
-    query_obj = None
-
-    # 最新排序
-    if st == 1:
-        query_obj = TaskModel.query.order_by(TaskModel.creat_time.desc())
-
-    posts = query_obj.slice(start, end)
-    total = query_obj.count()
-
-    # pagination 用于前台页面的上一页和下一页的控制
-    pagination = Pagination(bs_version=3, page=page, total=total)
 
     # 返回多个参数到 html 页面
     context = {'banners': banners,
-               'posts': posts,
-               'pagination': pagination,
-               # 方便前端点击那个板块，那个板块就选中的参数
-               'current_board': bd,
-               'current_st': st}
+
+               'tasks': tasks,
+               }
 
     return render_template('front/front_index.html', **context)
 
@@ -78,7 +92,7 @@ def index():
 def task_detail(post_id):
     post = TaskModel.query.get(post_id)
 
-    ranks = WorkModel.query.filter_by(task_status=2, task_id=post_id). \
+    ranks = WorkModel.query.filter_by(task_status=2, task_ori=post.name). \
         order_by(WorkModel.task_score.desc()).limit(5)
 
     if not post:
@@ -111,14 +125,14 @@ def add_contest(uuid):
         else:
             task_flag = ''
 
-        work.tasks = task
         work.task_name = shortuuid.uuid()
         work.writer = g.front_user
+        work.task_ori = task.name
 
         # 获取空闲的主机
         host = db.session.query(HostModel).order_by(HostModel.worknum).first()
         host.worknum = host.worknum + 1
-        tmpip = host.ip
+        tmp_ip = host.ip
         will_syn = host.syn_mirror
         will_syn_list = will_syn.split(',')
         if task.name not in will_syn_list:
@@ -130,7 +144,7 @@ def add_contest(uuid):
         tmp_port = port.name
         port.host_id = host.id
 
-        work.hostport = '%s:%s' % (tmpip, tmp_port)
+        work.host_port = '%s:%s' % (tmp_ip, tmp_port)
         work.task_status = '1'
 
         # 容器创建完毕之后，修改port 的状态
@@ -166,9 +180,9 @@ def rcontest(uuid):
 
     work.task_status = 2
     tmpname = work.task_name
-    tmpport = work.hostport.split(':')[1]
+    tmpport = work.host_port.split(':')[1]
 
-    tmpip = work.hostport.split(':')[0]
+    tmpip = work.host_port.split(':')[0]
 
     port = PortModel.query.filter_by(name=tmpport).first()
     port.status = '5'
@@ -177,7 +191,7 @@ def rcontest(uuid):
     host = HostModel.query.filter_by(ip=tmpip).first()
     host.worknum = host.worknum - 1
 
-    redis_ex = redis.Redis(host='127.0.0.1', port=6379, db=0)
+    # redis_ex = redis.Redis(host='127.0.0.1', port=6379, db=0)
     # redis_ex.hdel(work.id, 'progress')
     # redis_ex.hdel(work.id, 'domain')
     import docker

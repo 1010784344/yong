@@ -12,7 +12,7 @@ import config
 from apps.cms.decorators import login_required
 from exts import db, main_docker
 from utils import checkip
-from tasks import del_contest
+from tasks import del_contest, del_all_source
 
 
 # 定义 cms 的蓝图
@@ -43,21 +43,26 @@ def profile():
 
 
 # 主机管理
-@cms_bp.route('/hosts/')
+@cms_bp.route('/hosts')
+@cms_bp.route('/hosts/<int:page>')
 @login_required
-def hosts():
-    all_host = HostModel.query.all()
-    for tmp_host in all_host:
-        tmp_ip = tmp_host.ip
-        if not checkip.ping_all(tmp_ip):
-            tmp_host.status = 0
-        else:
-            tmp_host.status = 1
-    db.session.commit()
+def hosts(page=None):
 
-    all_host = HostModel.query.all()
+    if not page:
+        page = 1
 
-    return render_template('cms/cms_hosts.html', allbanner=all_host)
+    all_host = HostModel.query.order_by(HostModel.create_time.desc()).paginate(page=page, per_page=5)
+    # for tmp_host in all_host:
+    #     tmp_ip = tmp_host.ip
+    #     if not checkip.ping_all(tmp_ip):
+    #         tmp_host.status = 0
+    #     else:
+    #         tmp_host.status = 1
+    # db.session.commit()
+
+    # all_host = HostModel.query.all()
+
+    return render_template('cms/cms_hosts.html', all_host=all_host)
 
 
 # 添加主机弹窗 的提交表单
@@ -70,12 +75,14 @@ def add_host():
     if form.validate():
         name = form.name.data
         ip = form.ip.data
-        status = form.status.data
+        check_res = checkip.test_ip(ip)
+        if not check_res:
+            return jsonify({'code': '400', 'message': 'ip 输入有误，请重新输入！'})
 
         # 真实添加主机
         # checkip.add_ip(ip)
 
-        host = HostModel(name=name, ip=ip, status=status)
+        host = HostModel(name=name, ip=ip, status='1')
 
         db.session.add(host)
         db.session.commit()
@@ -103,29 +110,39 @@ def del_host():
     if not host:
         return jsonify({'code': '400', 'message': '主机不存在！'})
 
+    del_all_source.delay(host.ip)
+
     db.session.delete(host)
     db.session.commit()
     return jsonify({'code': '200', 'message': '主机删除成功！'})
 
 
 # 任务管理
-@cms_bp.route('/works/')
+@cms_bp.route('/works')
+@cms_bp.route('/works/<int:page>')
 @login_required
-def works():
+def works(page=None):
 
-    all_work = WorkModel.query.all()
+    if not page:
+        page = 1
 
-    return render_template('cms/cms_works.html', allbanner=all_work)
+    all_work = WorkModel.query.order_by(WorkModel.task_time.desc()).paginate(page=page, per_page=5)
+
+    return render_template('cms/cms_works.html', all_work=all_work)
 
 
 # 镜像管理
-@cms_bp.route('/tasks/')
+@cms_bp.route('/tasks')
+@cms_bp.route('/tasks/<int:page>')
 @login_required
-def tasks():
+def tasks(page=None):
 
-    all_task = TaskModel.query.all()
+    if not page:
+        page = 1
 
-    return render_template('cms/cms_tasks.html', allbanner=all_task)
+    all_task = TaskModel.query.order_by(TaskModel.creat_time.desc()).paginate(page=page, per_page=5)
+
+    return render_template('cms/cms_tasks.html', all_task=all_task)
 
 
 # 添加镜像弹窗 的提交表单
@@ -209,9 +226,9 @@ def del_work():
         return jsonify({'code': '400', 'message': '任务不存在！'})
 
     tmp_name = work.task_name
-    tmp_port = work.hostport.split(':')[1]
+    tmp_port = work.host_port.split(':')[1]
 
-    tmp_ip = work.hostport.split(':')[0]
+    tmp_ip = work.host_port.split(':')[0]
 
     port = PortModel.query.filter_by(name=tmp_port).first()
     port.status = '5'

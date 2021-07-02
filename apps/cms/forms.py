@@ -25,7 +25,6 @@ class AddTaskForm(Form):
 class AddHostForm(Form):
     name = StringField(validators=[input_required(message='请输入主机名称!')])
     ip = StringField(validators=[])
-    status = StringField(validators=[input_required(message='请输入主机状态!')])
 
 
 if __name__ == '__main__':

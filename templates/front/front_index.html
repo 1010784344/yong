@@ -1,5 +1,6 @@
 {% extends "front/front_base.html" %}
 {% from "common/_macros.html" import static %}
+{% import 'common/macro_paginate.html' as paginator %}
 
 {% block  title %}
 竞赛论坛
@@ -91,7 +92,7 @@
             </ul>
 
            <ul class="post-list-group">
-                {% for post in posts %}
+                {% for post in tasks.items %}
                     <li>
                         <div class="author-avatar-group">
 {#                            如果用户没有上传头像就用默认的头像#}
@@ -122,7 +123,7 @@
 
         <div style="text-align: center">
 
-            {{ pagination.links }}
+            {{ paginator.paginate(tasks,'front.index') }}
 
         </div>
 

@@ -1,5 +1,7 @@
 {% extends 'cms/cms_base.html' %}
 {%  from 'common/_macros.html' import static %}
+{% import 'common/macro_paginate.html' as paginator %}
+
 
 
 {% block title %}
@@ -54,15 +56,15 @@
         </thead>
 
         <tbody>
-                {% for banner in allbanner %}
+                {% for banner in all_work.items %}
                     <tr data-name="{{ banner.name }}" data-img="{{ banner.image_url }}" data-link="{{ banner.link_url }}" data-priority="{{ banner.priority }}" data-id="{{ banner.id }}">
                         <td>{{ banner.writer.username }}</td>
 
-                        <td>{{ banner.tasks.name }}</td>
+                        <td>{{ banner.task_ori }}</td>
 
                         <td>{{ banner.task_name }}</td>
                         <td>{{ banner.task_flag }}</td>
-                        <td>{{ banner.hostport }}</td>
+                        <td>{{ banner.host_port }}</td>
 
                         <td>{{ banner.task_status }}</td>
                         <td>{{ banner.task_score }}</td>
@@ -79,6 +81,12 @@
 
         </tbody>
     </table>
+
+    <div style="text-align: center">
+
+            {{ paginator.paginate(all_work,'cms.works') }}
+
+        </div>
 
 
 

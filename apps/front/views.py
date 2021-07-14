@@ -77,7 +77,6 @@ def index(page=None):
 
     tasks = TaskModel.query.order_by(TaskModel.creat_time.desc()).paginate(page=page, per_page=5)
 
-
     # 返回多个参数到 html 页面
     context = {'banners': banners,
 
@@ -130,8 +129,8 @@ def add_contest(uuid):
         work.task_ori = task.name
 
         # 获取空闲的主机
-        host = db.session.query(HostModel).order_by(HostModel.worknum).first()
-        host.worknum = host.worknum + 1
+        host = db.session.query(HostModel).order_by(HostModel.work_num).first()
+        host.work_num = host.work_num + 1
         tmp_ip = host.ip
         will_syn = host.syn_mirror
         will_syn_list = will_syn.split(',')
@@ -155,7 +154,7 @@ def add_contest(uuid):
         current_app.logger.info(tmp_info)
 
         # 异步启动创建流程
-        create_contest.delay(work.task_name, uuid, task.name, task.image, port.name, task_flag, host.ip)
+        create_contest(work.task_name, uuid, task.name, task.image, port.name, task_flag, host.ip, task.flag)
         """
         uuid 前端传递过来的进度唯一标识
         taskflag 动态flag
@@ -189,7 +188,7 @@ def rcontest(uuid):
     port.host_id = 0
 
     host = HostModel.query.filter_by(ip=tmpip).first()
-    host.worknum = host.worknum - 1
+    host.work_num = host.work_num - 1
 
     # redis_ex = redis.Redis(host='127.0.0.1', port=6379, db=0)
     # redis_ex.hdel(work.id, 'progress')
@@ -212,7 +211,7 @@ def rcontest(uuid):
 
     return redirect(url_for('front.add_contest', uuid=uuid, task_id=taskid))
 
-
+# 集成了后台管理
 # 提交答案
 @front_bp.route('/aanswer/', methods=['GET'])
 @login_required

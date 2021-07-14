@@ -60,8 +60,9 @@ $(function () {
 
 
 
-
-
+        //
+        // dialog.modal('hide');
+        // window.location.reload()
 
 
         zlajax.post({
@@ -150,6 +151,30 @@ $(function () {
         });
     });
 });
+
+
+$(document).ready(function() {
+          $('input[type=radio][name=type_radio]').change(function() {
+
+              var tmp = $('#flagpath')
+
+              if (this.value == '1') {
+                  var realtmep = '<label class="col-sm-2 control-label">flag:</label>\n' +
+                      '                            <div class="col-sm-10">\n' +
+                      '                                <input type="text" class="form-control" name="priority" placeholder="flag">\n' +
+                      '                            </div>'
+              }
+              else if (this.value == '2') {
+                  var realtmep = '<label class="col-sm-2 control-label">flag路径:</label>\n' +
+                      '                            <div class="col-sm-10">\n' +
+                      '                                <input type="text" class="form-control" name="priority" placeholder="路径">\n' +
+                      '                            </div>'
+             }
+              tmp.html(realtmep)
+         });
+     });
+
+
 
 
 //初始化七牛

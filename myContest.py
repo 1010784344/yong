@@ -22,7 +22,8 @@ logging_format = logging.Formatter(
 handler.setFormatter(logging_format)
 app.logger.addHandler(handler)
 
-# 引入配置文件
+# 引入配置文件ls
+
 app.config.from_object(config)
 
 # 注册 sqlalchemy 到 app 里面

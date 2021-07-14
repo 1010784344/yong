@@ -56,13 +56,15 @@
         <tbody>
                 {% for banner in all_host.items %}
                     <tr data-name="{{ banner.name }}" data-img="{{ banner.ip }}" data-link="{{ banner.status }}" data-id="{{ banner.id }}">
-                        <td>{{ banner.name }}</td>
+                        <td>{{ banner.name }}{% if banner.is_main == 1 %}
+                                    <span class="label label-danger">主节点</span>
+                                {% endif %}</td>
 
                         <td>{{ banner.ip }}</td>
 
 {#                        <td>{{ banner.status|host_status }}</td>#}
-                        <td>{% if banner.status == '1' %} 在线  {% elif banner.status == '0' %} 离线 {% endif %}</td>
-                        <td>{{ banner.worknum }}</td>
+                        <td id="{{ banner.id }}">{% if banner.status == '1' %} 在线  {% elif banner.status == '0' %} 离线 {% endif %}</td>
+                        <td>{{ banner.work_num }}</td>
                         <td>{{ banner.syn_mirror }}</td>
                         <td>{{ banner.create_time }}</td>
                         <td>
@@ -110,6 +112,18 @@
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="link_url" placeholder="主机IP">
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"></label>
+                            <div class="col-sm-10">
+                                <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="img_url" value="999">是否为主节点
+                            </label>
+                                    </div>
+
+                        </div>
+
                         </div>
 
 

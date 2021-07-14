@@ -9,7 +9,7 @@ $(function(){
 
         var telephone=telephone_input.val();
         var password=password_input.val();
-        var remember=remember_input.checked?1:0;
+        var remember=remember_input.is(':checked')?1:0;
 
         zlajax.post({
            'url':'/signin/',

@@ -2,12 +2,14 @@
 
 
 import os
+import shutil
 import docker
 from celery import Celery
 from flask import Flask
 
 import config
-from exts import main_docker, redis_ex
+from exts import main_docker, redis_ex, celery_session
+from apps.models import HostModel
 
 
 # 初始化 一个新的app 对象
@@ -48,8 +50,8 @@ def image_up(img_url, name, file_name):
 
 
 # 定义一个创建赛题的任务
-@celery.task
-def create_contest(tmp_uuid, work_id, task_name, task_image, port_name, task_flag, hos_tip):
+# @celery.task
+def create_contest(tmp_uuid, work_id, task_name, task_image, port_name, task_flag, hos_tip, image_flag):
 
     redis_ex.hset(work_id, 'progress', 0)
 
@@ -112,7 +114,10 @@ def create_contest(tmp_uuid, work_id, task_name, task_image, port_name, task_fla
 
     if task_flag:
         add_flag = my_docker.containers.get(tmp_uuid)
-        add_flag.exec_run("sh -c 'echo %s > /flag.txt'" % task_flag)
+        image_path = '/tmp/%s' % image_flag
+
+        add_flag.exec_run("mkdir -p %s" % image_path)
+        add_flag.exec_run("sh -c 'echo %s > %s/flag.txt'" % (task_flag, image_path))
 
     redis_ex.hset(work_id, 'progress', 100)
     print(tmp_uuid)
@@ -164,7 +169,32 @@ def del_all_source(tmp_ip):
     except Exception as e:
         pass
 
+
     print("资源删除成功！")
+
+
+# 同步镜像到各个主机
+# @celery.task
+def syn_all_source(task_name, task_image):
+
+    try:
+        task_path = os.path.join(config.UPLOADED_DIR, task_name + os.sep + task_image)
+        tmp_path = '/home/srv'
+
+        res = celery_session.query(HostModel).all()  # 返回表中所有数据对象
+
+        for tmp_host in res:
+            if str(tmp_host.is_main) == '1':
+                real_path = tmp_path + os.sep + task_image
+                if not os.path.exists(real_path):
+                    shutil.copy(task_path, tmp_path)
+            else:
+                output = os.system('sshpass -p "123456" scp %s root@%s:/home/srv' % (task_path, tmp_host.ip))
+
+    except Exception as e:
+        pass
+
+    print("资源同步成功！")
 
 
 if __name__ == '__main__':

@@ -12,7 +12,7 @@ import config
 from apps.cms.decorators import login_required
 from exts import db, main_docker
 from utils import checkip
-from tasks import del_contest, del_all_source
+from tasks import del_contest, del_all_source, syn_all_source
 
 
 # 定义 cms 的蓝图
@@ -65,6 +65,23 @@ def hosts(page=None):
     return render_template('cms/cms_hosts.html', all_host=all_host)
 
 
+# 主机是否在线状态轮询
+@cms_bp.route("/ip_status", methods=["GET"])
+def ip_status():
+    host_info = {}
+    all_host = HostModel.query.all()
+    for tmp_host in all_host:
+        tmp_ip = tmp_host.ip
+        if not checkip.ping_all(tmp_ip):
+            tmp_host.status = '0'
+        else:
+            tmp_host.status = '1'
+        host_info[tmp_host.id] = '在线' if tmp_host.status == '1' else '离线'
+    db.session.commit()
+
+    return jsonify(host_info)
+
+
 # 添加主机弹窗 的提交表单
 @cms_bp.route('/add_host/', methods=['POST'])
 @login_required
@@ -75,14 +92,17 @@ def add_host():
     if form.validate():
         name = form.name.data
         ip = form.ip.data
+        is_main = form.is_main.data
         check_res = checkip.test_ip(ip)
         if not check_res:
             return jsonify({'code': '400', 'message': 'ip 输入有误，请重新输入！'})
 
         # 真实添加主机
         # checkip.add_ip(ip)
-
-        host = HostModel(name=name, ip=ip, status='1')
+        if is_main == '1':
+            host = HostModel(name=name, ip=ip, status='1', is_main='1')
+        else:
+            host = HostModel(name=name, ip=ip, status='1')
 
         db.session.add(host)
         db.session.commit()
@@ -174,6 +194,10 @@ def add_task():
         db.session.add(task)
         db.session.commit()
 
+        # 同步镜像资源到其他的主机
+        # syn_all_source.delay()
+        syn_all_source(name, filename)
+
         return jsonify({'code': '200', 'message': '镜像添加成功！'})
     else:
 
@@ -235,10 +259,17 @@ def del_work():
     port.host_id = 0
 
     host = HostModel.query.filter_by(ip=tmp_ip).first()
-    if host.worknum <= 0:
-        host.worknum = 0
+
+    if not host:
+        db.session.delete(work)
+        db.session.commit()
+
+        return jsonify({'code': '200', 'message': '任务删除成功！'})
+
+    if host.work_num <= 0:
+        host.work_num = 0
     else:
-        host.worknum = host.worknum - 1
+        host.work_num = host.work_num - 1
 
     del_contest.delay(tmp_ip, tmp_name)
 
@@ -248,7 +279,7 @@ def del_work():
     #     del_docker = docker.DockerClient(base_url='tcp://%s:2375' % tmp_ip)
     #
     #     tmp_docker = del_docker.containers.get(tmp_name)
-    #     tmp_docker.remove(force=True)
+    #     tmp_d                                               ocker.remove(force=True)
     #
     #     conf_path = "/home/wang/nginx/conf.d/%s.conf" % tmp_name
     #     if os.path.exists(conf_path):

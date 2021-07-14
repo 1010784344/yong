@@ -12,6 +12,9 @@ $(function () {
 
         var ipInput = $("input[name='link_url']");
 
+        // var mainInput = $("input[name=img_url]");
+        var mainInput = $("input[name=img_url]");
+
 
         // var priorityInput = $("input[name='priority']");
 
@@ -19,6 +22,13 @@ $(function () {
         var name = nameInput.val();
         console.log(name)
         var ip = ipInput.val();
+        var haha = mainInput.is(':checked')
+        console.log('sssssssss')
+        console.log(haha)
+        //判断选中的状态
+        var ismain = mainInput.is(':checked')?1:0;
+        console.log('sssssssss')
+        console.log(ismain)
         console.log(ip)
         console.log(status)
         // var priority = priorityInput.val();
@@ -45,6 +55,7 @@ $(function () {
             'data': {
                 'name': name,
                 'ip': ip,
+                'is_main':ismain,
                 'banner_id': bannerId
             },
             'success': function (data) {
@@ -122,20 +133,22 @@ $(function () {
 });
 
 
-//初始化七牛
-// $(function () {
-//
-//     //zlqiniu对象的setup 方法的传参
-//     zlqiniu.setup({
-//         'domain': 'http://q7bncq283.bkt.clouddn.com/',
-//         //上传图片的按钮
-//         'browse_btn': 'upload-btn',
-//         //提交的url
-//         'uptoken_url': '/c/uptoken/',
-//         'success': function (up, file, info) {
-//             //上传成功后，显示图片的url
-//             // var imageInput = $("input[name='img_url']");
-//             // imageInput.val(file.name);
-//         }
-//     });
-// });
+
+function get_vote() {
+            $.ajax({
+                url:'/cms/ip_status',
+                type:"GET",
+                dataType:'JSON',
+                success:function (arg) {
+
+                    $.each(arg,function (k,v) {
+
+                        $('#'+k).text(v)
+
+                    })
+
+                }
+            })
+        }
+
+setInterval(get_vote,3000)

@@ -154,7 +154,7 @@ def add_contest(uuid):
         current_app.logger.info(tmp_info)
 
         # 异步启动创建流程
-        create_contest(work.task_name, uuid, task.name, task.image, port.name, task_flag, host.ip, task.flag)
+        create_contest.delay(work.task_name, uuid, task.name, task.image, port.name, task_flag, host.ip, task.flag)
         """
         uuid 前端传递过来的进度唯一标识
         taskflag 动态flag
@@ -223,8 +223,8 @@ def aanswer():
         work = WorkModel.query.filter_by(task_name=work_name).first()
         real_flag = work.task_flag
         if not real_flag:
-            quiet_id = work.task_id
-            task = TaskModel.query.filter_by(id=quiet_id).first()
+            quiet_name = work.task_ori
+            task = TaskModel.query.filter_by(name=quiet_name).first()
             real_flag = task.flag
         if flag_info != real_flag:
 

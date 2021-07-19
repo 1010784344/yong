@@ -9,7 +9,7 @@ from flask import Flask
 
 import config
 from exts import main_docker, redis_ex, celery_session
-from apps.models import HostModel
+from apps.models import HostModel, WorkModel
 
 
 # 初始化 一个新的app 对象
@@ -50,7 +50,7 @@ def image_up(img_url, name, file_name):
 
 
 # 定义一个创建赛题的任务
-# @celery.task
+@celery.task
 def create_contest(tmp_uuid, work_id, task_name, task_image, port_name, task_flag, hos_tip, image_flag):
 
     redis_ex.hset(work_id, 'progress', 0)
@@ -60,17 +60,17 @@ def create_contest(tmp_uuid, work_id, task_name, task_image, port_name, task_fla
     import shutil
     tmp_path = '/home/srv'
     # 本地 tar 包目录
-    if hos_tip in ['192.168.141.177', '192.168.141.188']:
-        real_path = tmp_path + os.sep + task_image
-        if not os.path.exists(real_path):
-            shutil.copy(task_path, tmp_path)
-        # 如果是同一个主机就是同一个 docker
-        my_docker = main_docker
-
-    else:
-        output = os.system('sshpass -p "123456" scp %s root@%s:/home/srv' % (task_path, hos_tip))
-        # 如果是不同一个主机就新创建一个 docker
-        my_docker = docker.DockerClient(base_url='tcp://%s:2375' % hos_tip)
+    # if hos_tip in ['192.168.141.177', '192.168.141.188']:
+    #     real_path = tmp_path + os.sep + task_image
+    #     if not os.path.exists(real_path):
+    #         shutil.copy(task_path, tmp_path)
+    #     # 如果是同一个主机就是同一个 docker
+    #     my_docker = main_docker
+    #
+    # else:
+    output = os.system('sshpass -p "123456" scp %s root@%s:/home/srv' % (task_path, hos_tip))
+    # 如果是不同一个主机就新创建一个 docker
+    my_docker = docker.DockerClient(base_url='tcp://%s:2375' % hos_tip)
 
     redis_ex.hset(work_id, 'progress', 20)
     try:
@@ -161,11 +161,20 @@ def del_all_source(tmp_ip):
         docker_list = del_docker.containers.list()
         for tmp_docker in docker_list:
             tmp_name = tmp_docker.name
+            if tmp_name == 'proxy-ng':
+                continue
             tmp_docker.remove(force=True)
 
             conf_path = "/root/nginx/conf.d/%s.conf" % tmp_name
             if os.path.exists(conf_path):
                 os.remove(conf_path)
+
+        res = celery_session.query(WorkModel).filter(WorkModel.host_port.like('%s%%' % tmp_ip)).delete(synchronize_session=False)
+
+        celery_session.commit()
+        celery_session.close()
+
+
     except Exception as e:
         pass
 
@@ -174,7 +183,7 @@ def del_all_source(tmp_ip):
 
 
 # 同步镜像到各个主机
-# @celery.task
+@celery.task
 def syn_all_source(task_name, task_image):
 
     try:

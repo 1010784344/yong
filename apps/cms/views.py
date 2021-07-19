@@ -100,9 +100,9 @@ def add_host():
         # 真实添加主机
         # checkip.add_ip(ip)
         if is_main == '1':
-            host = HostModel(name=name, ip=ip, status='1', is_main='1')
+            host = HostModel(name=name, ip=ip, status='1', is_main='1', syn_mirror=',')
         else:
-            host = HostModel(name=name, ip=ip, status='1')
+            host = HostModel(name=name, ip=ip, status='1', syn_mirror=',')
 
         db.session.add(host)
         db.session.commit()
@@ -131,6 +131,7 @@ def del_host():
         return jsonify({'code': '400', 'message': '主机不存在！'})
 
     del_all_source.delay(host.ip)
+    # del_all_source(host.ip)
 
     db.session.delete(host)
     db.session.commit()
@@ -195,8 +196,8 @@ def add_task():
         db.session.commit()
 
         # 同步镜像资源到其他的主机
-        # syn_all_source.delay()
-        syn_all_source(name, filename)
+        syn_all_source.delay()
+        # syn_all_source(name, filename)
 
         return jsonify({'code': '200', 'message': '镜像添加成功！'})
     else:

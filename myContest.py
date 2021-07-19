@@ -22,7 +22,7 @@ logging_format = logging.Formatter(
 handler.setFormatter(logging_format)
 app.logger.addHandler(handler)
 
-# 引入配置文件ls
+# 引入配置文件
 
 app.config.from_object(config)
 

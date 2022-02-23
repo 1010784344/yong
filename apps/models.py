@@ -66,7 +66,7 @@ class HostModel(db.Model):
     create_time = db.Column(db.DateTime, default=datetime.now)
     work_num = db.Column(db.Integer, default=0)
     is_main = db.Column(db.Integer, default=2)
-    syn_mirror = db.Column(db.String(255), nullable=',')
+    syn_mirror = db.Column(db.String(255), nullable=True)
     # 一个主机有多个work
     works = db.relationship('WorkModel', backref='hosts')
     # 一个host 可以使用多个端口

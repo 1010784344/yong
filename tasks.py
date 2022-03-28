@@ -8,7 +8,7 @@ from celery import Celery
 from flask import Flask
 
 import config
-from exts import main_docker, redis_ex, celery_session
+from exts import redis_ex, celery_session
 from apps.models import HostModel, WorkModel
 
 
@@ -109,7 +109,7 @@ def create_contest(tmp_uuid, work_id, task_name, task_image, port_name, task_fla
 
     redis_ex.hset(work_id, 'progress', 80)
     # 获取代理容器并再代理容器重新加载 nginx 配置文件
-    pro = main_docker.containers.get("proxy-ng")
+    # pro = main_docker.containers.get("proxy-ng")
     pro.exec_run("nginx -s reload")
 
     if task_flag:
@@ -144,7 +144,7 @@ def del_contest(tmp_ip, tmp_name):
     except Exception as e:
         pass
 
-    pro = main_docker.containers.get("proxy-ng")
+    # pro = main_docker.containers.get("proxy-ng")
     pro.exec_run("nginx -s reload")
     print("任务删除成功！")
     # tmp_info = '任务 %s 删除成功！' % tmp_name

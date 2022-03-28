@@ -16,11 +16,11 @@ app = Flask(__name__)
 # 日志系统配置
 app.logger.setLevel(logging.DEBUG)
 
-handler = logging.FileHandler('/var/log/myContest.log', encoding='UTF-8')
-logging_format = logging.Formatter(
-    '%(asctime)s - %(levelname)s - %(filename)s - %(funcName)s - %(lineno)s - %(message)s')
-handler.setFormatter(logging_format)
-app.logger.addHandler(handler)
+# handler = logging.FileHandler('/var/log/myContest.log', encoding='UTF-8')
+# logging_format = logging.Formatter(
+#     '%(asctime)s - %(levelname)s - %(filename)s - %(funcName)s - %(lineno)s - %(message)s')
+# handler.setFormatter(logging_format)
+# app.logger.addHandler(handler)
 
 # 引入配置文件
 

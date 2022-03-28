@@ -12,7 +12,7 @@ from apps.front.forms import SignupForm, SignInForm
 from apps.models import BannersModel, TaskModel, WorkModel, PortModel, HostModel
 from apps.front.models import FrontUser
 from apps.front.decorators import login_required
-from exts import db, main_docker, redis_ex
+from exts import db, redis_ex
 import config
 from tasks import create_contest
 

@@ -10,7 +10,7 @@ from apps.cms.models import CMSUser
 from apps.models import TaskModel, WorkModel, HostModel, PortModel
 import config
 from apps.cms.decorators import login_required
-from exts import db, main_docker
+from exts import db
 from utils import checkip
 from tasks import del_contest, del_all_source, syn_all_source
 

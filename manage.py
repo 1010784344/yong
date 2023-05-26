@@ -70,7 +70,7 @@ def add_cms_role():
     db.session.commit()
 
 
-# 用法：python manage.py add_user_role -e 1010784344@qq.com -n 访问者
+# 用法：python manage.py add_user_role -e 1010784344@qq.com -n 管理员
 # 给某个用户添加一个角色
 @manager.option('-e', '--email', dest='email')
 @manager.option('-n', '--name', dest='name')
